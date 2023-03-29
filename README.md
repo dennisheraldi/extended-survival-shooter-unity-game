@@ -6,7 +6,7 @@ Extended Survival Shooter adalah permainan versi lanjutan dari Survival Shooter 
 
 ## Library yang Digunakan
 
-UnityEngine versi 2021.3.20f1
+Unity versi 2021.3.21f1 LTS
 
 ## Screenshot aplikasi
 
