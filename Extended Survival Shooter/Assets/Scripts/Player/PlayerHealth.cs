@@ -12,15 +12,16 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip deathClip;                                 // The audio clip to play when the player dies.
     public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
-
+    public float startTime;
+    public float deathTime;
 
     Animator anim;                                              // Reference to the Animator component.
     AudioSource playerAudio;                                    // Reference to the AudioSource component.
     PlayerMovement playerMovement;                              // Reference to the player's movement.
     PlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
-    bool isDead;                                                // Whether the player is dead.
+    public bool isDead;                                                // Whether the player is dead.
     bool damaged;                                               // True when the player gets damaged.
-
+    
 
     void Awake()
     {
@@ -29,9 +30,14 @@ public class PlayerHealth : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerMovement>();
         playerShooting = GetComponentInChildren<PlayerShooting>();
-
+        if (healthSlider == null)
+        {
+            Debug.Log("Health Slider is Null");
+        }
+        
         // Set the initial health of the player.
         currentHealth = startingHealth;
+        startTime = Time.time;
     }
 
 
@@ -82,6 +88,8 @@ public class PlayerHealth : MonoBehaviour
     {
         // Set the death flag so this function won't be called again.
         isDead = true;
+
+        deathTime = Time.time;
 
         // Turn off any remaining shooting effects.
         playerShooting.DisableEffects();

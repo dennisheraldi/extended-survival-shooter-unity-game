@@ -5249,7 +5249,7 @@ GameObject:
   - component: {fileID: 8982576067212383414}
   - component: {fileID: 2556222301771229423}
   - component: {fileID: 6970389721810882304}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DeathParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

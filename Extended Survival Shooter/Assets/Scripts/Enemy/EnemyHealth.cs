@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     Animator anim;                              // Reference to the animator.
     AudioSource enemyAudio;                     // Reference to the audio source.
     ParticleSystem hitParticles;                // Reference to the particle system that plays when the enemy is damaged.
+    ParticleSystem deathParticles;              // Reference to the particle system that plays when the enemy is dead. 
     CapsuleCollider capsuleCollider;            // Reference to the capsule collider.
     bool isDead;                                // Whether the enemy is dead.
     bool isSinking;                             // Whether the enemy has started sinking through the floor.
@@ -23,6 +24,7 @@ public class EnemyHealth : MonoBehaviour
         anim = GetComponent<Animator>();
         enemyAudio = GetComponent<AudioSource>();
         hitParticles = GetComponentInChildren<ParticleSystem>();
+        deathParticles = GetComponentsInChildren<ParticleSystem>()[1];
         capsuleCollider = GetComponent<CapsuleCollider>();
 
         // Setting the current health when the enemy first spawns.
@@ -45,8 +47,12 @@ public class EnemyHealth : MonoBehaviour
     {
         // If the enemy is dead...
         if (isDead)
+        {
+            deathParticles.Play();
             // ... no need to take damage so exit the function.
             return;
+        }
+            
 
         // Play the hurt sound effect.
         enemyAudio.Play();
@@ -71,6 +77,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Death()
     {
+        
         // The enemy is dead.
         isDead = true;
 
@@ -82,6 +89,7 @@ public class EnemyHealth : MonoBehaviour
 
         // Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing).
         enemyAudio.clip = deathClip;
+        
         enemyAudio.Play();
     }
 

@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System;
+
 
 public class ScoreManager : MonoBehaviour
 {
     public static int score;
 
+    private float startTime;
+
+    public PlayerHealth playerHealth;
 
     Text text;
 
@@ -14,11 +18,19 @@ public class ScoreManager : MonoBehaviour
     {
         text = GetComponent <Text> ();
         score = 0;
+        startTime = playerHealth.startTime;
     }
 
 
     void Update ()
     {
-        text.text = "Score: " + score;
+        float currentTime = Time.time - startTime;
+
+        if (playerHealth.isDead)
+        {
+            currentTime = playerHealth.deathTime - startTime;
+        }
+        
+        text.text = "Time: " + TimeSpan.FromSeconds((int)currentTime).ToString("c");
     }
 }
