@@ -1628,7 +1628,7 @@ PrefabInstance:
     - target: {fileID: 95713256148318574, guid: 07359941ee957c64182120edb58b9184, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 7453a43d7337eec40a5afec367c00091, type: 2}
+      objectReference: {fileID: 9100000, guid: 58c872b78c395be47844ed7861d3d5ab, type: 2}
     - target: {fileID: 114500601062302584, guid: 07359941ee957c64182120edb58b9184, type: 3}
       propertyPath: m_Text
       value: 'Time: 00:00:00'
