@@ -6,6 +6,8 @@ public class EnemyManager : MonoBehaviour
     public GameObject enemy;
     public float spawnTime = 3f;
     public Transform[] spawnPoints;
+    int countSpawn = 0;
+    public static int maxSpawn;
 
 
     void Start ()
@@ -21,8 +23,10 @@ public class EnemyManager : MonoBehaviour
             return;
         }
 
-        int spawnPointIndex = Random.Range (0, spawnPoints.Length);
-        Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-
+        if (countSpawn < maxSpawn) {
+            int spawnPointIndex = Random.Range(0, spawnPoints.Length);
+            Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+            countSpawn++;
+        }
     }
 }

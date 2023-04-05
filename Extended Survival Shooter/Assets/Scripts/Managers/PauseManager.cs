@@ -11,8 +11,9 @@ public class PauseManager : MonoBehaviour
 
 	public AudioMixerSnapshot paused;
 	public AudioMixerSnapshot unpaused;
+	public Text QuestText;
 
-	Canvas canvas;
+	public Canvas canvas;
 
 	void Start()
 	{
@@ -32,7 +33,6 @@ public class PauseManager : MonoBehaviour
 	{
 		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
 		Lowpass();
-
 	}
 
 	void Lowpass()
@@ -40,12 +40,14 @@ public class PauseManager : MonoBehaviour
 		if (Time.timeScale == 0)
 		{
 			paused.TransitionTo(.01f);
+			QuestText.CrossFadeAlpha(0, 0, true);
 		}
 
 		else
 
 		{
 			unpaused.TransitionTo(.01f);
+			QuestText.CrossFadeAlpha(1, 0, true);
 		}
 	}
 

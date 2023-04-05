@@ -19,16 +19,16 @@ public class GameOverManager : MonoBehaviour
 
     void Update()
     {
-        if (playerHealth.isDead)
-        {
-            anim.SetTrigger("GameOver");
+        //if (PlayerHealth.isDead)
+        //{
+        //    anim.SetTrigger("GameOver");
 
-            restartTimer += Time.deltaTime;
+        //    restartTimer += Time.deltaTime;
 
-            if (restartTimer >= restartDelay)
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-        }
+        //    if (restartTimer >= restartDelay)
+        //    {
+        //        SceneManager.LoadScene("MainScene");
+        //    }
+        //}
     }
 }

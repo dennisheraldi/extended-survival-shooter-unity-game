@@ -105,8 +105,21 @@ public class EnemyHealth : MonoBehaviour
         // The enemy should no sink.
         isSinking = true;
 
-        // Increase the score by the enemy's score value.
-        ScoreManager.score += scoreValue;
+
+        switch (gameObject.name)
+        {
+            case "Zombunny(Clone)":
+                QuestManager.ZombunnyKilled++;
+                break;
+            case "ZomBear(Clone)":
+                QuestManager.ZombearKilled++;
+                break;
+            case "Hellephant(Clone)":
+                QuestManager.HellephantKilled++;
+                break;
+            default:
+                break;
+        }
 
         // After 2 seconds destory the enemy.
         Destroy(gameObject, 2f);

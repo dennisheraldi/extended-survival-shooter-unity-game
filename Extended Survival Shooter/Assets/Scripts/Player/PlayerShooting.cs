@@ -14,8 +14,9 @@ public class PlayerShooting : MonoBehaviour
     LineRenderer gunLine;                           // Reference to the line renderer.
     AudioSource gunAudio;                           // Reference to the audio source.
     Light gunLight;                                 // Reference to the light component.
-    public Light faceLight;                             // Duh
+    //public Light faceLight;                             // Duh
     float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.             
+    public PauseManager pauseManager;
 
     void Awake()
     {
@@ -24,7 +25,6 @@ public class PlayerShooting : MonoBehaviour
         gunLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
         gunLight = GetComponent<Light>();
-        faceLight = GetComponentInChildren<Light>();
     }
 
     void Update()
@@ -33,7 +33,7 @@ public class PlayerShooting : MonoBehaviour
         timer += Time.deltaTime;
 
         // If the Fire1 button is being press and it's time to fire...
-        if (Input.GetButton("Fire1") && timer >= timeBetweenBullets)
+        if (Input.GetButton("Fire1") && timer >= timeBetweenBullets && !pauseManager.canvas.enabled)
         {
             Shoot();
         }
@@ -49,7 +49,7 @@ public class PlayerShooting : MonoBehaviour
     {
         // Disable the line renderer and the light.
         gunLine.enabled = false;
-        faceLight.enabled = false;
+        //faceLight.enabled = false;
         gunLight.enabled = false;
     }
 
@@ -60,7 +60,7 @@ public class PlayerShooting : MonoBehaviour
         gunAudio.Play();
 
         gunLight.enabled = true;
-        faceLight.enabled = true;
+        //faceLight.enabled = true;
 
         gunParticles.Stop();
         gunParticles.Play();
