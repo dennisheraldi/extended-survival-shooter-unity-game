@@ -9,11 +9,12 @@ public class QuestManager : MonoBehaviour
 
     public Text questText;
     public Text questVerdict;
+    public Text details;
     public static int ZombunnyKilled = 0;
     public static int ZombearKilled = 0;
     public static int HellephantKilled = 0;
 
-    public float restartDelay = 5f;
+    public float restartDelay = 3f;
     public Animator anim;
     float restartTimer;
 
@@ -26,6 +27,7 @@ public class QuestManager : MonoBehaviour
         {
             currentQuest = MainManager.Instance.currentQuest;
             MainManager.Instance.isQuestOnGoing = true;
+
         }
 
         // Set max spawn for enemy
@@ -83,7 +85,7 @@ public class QuestManager : MonoBehaviour
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 2;
-            Transition("Quest 1 Completed", "QuestCompleted", "MainScene");
+            Transition("Quest 1 Completed", "QuestCompleted", "TransitionQuest1");
         }
 
     }
@@ -92,8 +94,9 @@ public class QuestManager : MonoBehaviour
     {
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 2: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/6)";
-        if (totalKill == 6)
+        if (totalKill == 1)
         {
+            MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 3;
             Transition("Quest 2 Completed", "QuestCompleted", "MainScene");
         }
@@ -103,8 +106,9 @@ public class QuestManager : MonoBehaviour
     {
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 3: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/9)";
-        if (totalKill == 9)
+        if (totalKill == 1)
         {
+            MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 4;
             Transition("Quest 3 Completed", "QuestCompleted", "MainScene");
         }
@@ -114,9 +118,13 @@ public class QuestManager : MonoBehaviour
     {
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 4: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/12)";
-        if (totalKill == 12)
+        if (totalKill == 1)
         {
-            Transition("Quest 4 Completed", "QuestCompleted", "MainScene");
+            MainManager.Instance.isQuestOnGoing = false;
+            questVerdict.text = "THE END";
+            details.text = "Game Completion Time " + System.TimeSpan.FromSeconds((int)MainManager.Instance.currentPlayDuration).ToString("c");
+            anim.SetTrigger("GameFinished");
+            Time.timeScale = 0;
         }
     }
 
@@ -124,8 +132,6 @@ public class QuestManager : MonoBehaviour
     {
         questVerdict.text = verdictText;
         anim.SetTrigger(trigger);
-        
-
         restartTimer += Time.deltaTime;
 
         if (restartTimer >= restartDelay)

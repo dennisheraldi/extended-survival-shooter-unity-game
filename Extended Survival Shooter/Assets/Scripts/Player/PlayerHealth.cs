@@ -32,14 +32,14 @@ public class PlayerHealth : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerMovement>();
         playerShooting = GetComponentInChildren<PlayerShooting>();
-        if (healthSlider == null)
-        {
-            Debug.Log("Health Slider is Null");
-        }
+        
         
         // Set the initial health of the player.
-        currentHealth = startingHealth;
+        currentHealth = MainManager.Instance.currentPlayerHealth;
         startTime = Time.time;
+
+        healthSlider.value = currentHealth;
+        healthText.text = currentHealth.ToString() + "/100";
     }
 
 
@@ -70,6 +70,9 @@ public class PlayerHealth : MonoBehaviour
 
         // Reduce the current health by the damage amount.
         currentHealth -= amount;
+
+        MainManager.Instance.currentPlayerHealth = currentHealth;
+        Debug.Log(MainManager.Instance.currentPlayerHealth);
 
         // Set the health bar's value to the current health.
         healthSlider.value = currentHealth;

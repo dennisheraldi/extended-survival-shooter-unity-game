@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 public class CutsceneLoader : MonoBehaviour
 {
     public Animator transition;
-    public PlayableDirector director =  null;
+    public PlayableDirector director;
 
-    public float transitionTime = 1f;
+    public float transitionTime = 6f;
 
     // Update is called once per frame
     void Update()
@@ -18,27 +18,25 @@ public class CutsceneLoader : MonoBehaviour
         //{
         //    LoadNextLevel();
         //}
-        if (!director)
+        
+        if (director.duration - director.time < 4)
         {
-            if (director.duration - director.time < 2)
-            {
-                LoadNextLevel();
-            }
+            LoadNextLevel();
         }
 
     }
 
     public void LoadNextLevel()
     {
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        StartCoroutine(LoadLevel("MainScene"));
     }
 
-    IEnumerator LoadLevel(int levelIndex)
+    IEnumerator LoadLevel(string SceneName)
     {
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);
 
-        SceneManager.LoadScene(levelIndex);
+        SceneManager.LoadScene(SceneName);
     }
 }
