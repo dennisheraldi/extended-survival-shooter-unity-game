@@ -188,7 +188,7 @@ public class QuestManager : MonoBehaviour
         // Update money
         MainManager.Instance.currentMoney += obtainedMoney;
         Reset();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         Time.timeScale = 0f;
     }
 

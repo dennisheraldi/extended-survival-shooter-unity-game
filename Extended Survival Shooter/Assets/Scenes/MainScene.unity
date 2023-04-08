@@ -612,6 +612,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109428909}
   m_CullTransparentMesh: 0
+--- !u!114 &153341498 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4387082747437813659, guid: 07359941ee957c64182120edb58b9184, type: 3}
+  m_PrefabInstance: {fileID: 4387082747080195965}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &169376293
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,7 +786,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 233724389}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 95713257325077124}
+        m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
+        m_MethodName: LoadLatestSavedData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &233724389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5941,6 +5964,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 42.7119
       objectReference: {fileID: 0}
+    - target: {fileID: 4387082747437813659, guid: 07359941ee957c64182120edb58b9184, type: 3}
+      propertyPath: m_Text
+      value: 'Money: 0'
+      objectReference: {fileID: 0}
     - target: {fileID: 4387082747621770392, guid: 07359941ee957c64182120edb58b9184, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -4.0784
@@ -5959,7 +5986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4387082747621770395, guid: 07359941ee957c64182120edb58b9184, type: 3}
       propertyPath: m_Text
-      value: back to main menu in ... seconds
+      value: lorem ipsum dolor sit amet
       objectReference: {fileID: 0}
     - target: {fileID: 4387082747621770395, guid: 07359941ee957c64182120edb58b9184, type: 3}
       propertyPath: m_Color.a
@@ -6001,6 +6028,10 @@ PrefabInstance:
       propertyPath: details
       value: 
       objectReference: {fileID: 452803404}
+    - target: {fileID: 4610694192997309974, guid: 07359941ee957c64182120edb58b9184, type: 3}
+      propertyPath: moneyText
+      value: 
+      objectReference: {fileID: 153341498}
     - target: {fileID: 4610694192997309974, guid: 07359941ee957c64182120edb58b9184, type: 3}
       propertyPath: questText
       value: 
