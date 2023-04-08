@@ -8,6 +8,7 @@ public class SaveProgress : MonoBehaviour
 {
 
     public Dropdown SlotChoice;
+    public Text DropdownLabel;
     public InputField CustomizeSlotName;
     public GameObject SaveProgressPanel;
 
@@ -18,7 +19,6 @@ public class SaveProgress : MonoBehaviour
         SlotChoice.options[0].text = "Slot 1";
         SlotChoice.options[1].text = "Slot 2";
         SlotChoice.options[2].text = "Slot 3";
-        CustomizeSlotName.text = SlotChoice.options[SlotChoice.value].text;
 
         // Read data from external files
         string[] filePaths = Directory.GetFiles(Application.persistentDataPath);
@@ -41,6 +41,9 @@ public class SaveProgress : MonoBehaviour
                 SlotChoice.options[2].text = data.slotName;
             }
         }
+
+        DropdownLabel.text = SlotChoice.options[SlotChoice.value].text;
+        CustomizeSlotName.text = SlotChoice.options[SlotChoice.value].text;
 
     }
 
@@ -68,5 +71,6 @@ public class SaveProgress : MonoBehaviour
     public void SaveAndContinue()
     {
         MainManager.Instance.SaveQuestProgress(SlotChoice.value, CustomizeSlotName.text);
+
     }
 }

@@ -87,6 +87,7 @@ public class QuestManager : MonoBehaviour
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 2;
+            MainManager.Instance.nextScene = "TransitionQuest1";
             Transition("Quest 1 Completed", "QuestCompleted", "TransitionQuest1");
         }
 
@@ -100,6 +101,7 @@ public class QuestManager : MonoBehaviour
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 3;
+            MainManager.Instance.nextScene = "MainScene";
             Transition("Quest 2 Completed", "QuestCompleted", "MainScene");
         }
     }
@@ -112,6 +114,7 @@ public class QuestManager : MonoBehaviour
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 4;
+            MainManager.Instance.nextScene = "MainScene";
             Transition("Quest 3 Completed", "QuestCompleted", "MainScene");
         }
     }
@@ -126,7 +129,12 @@ public class QuestManager : MonoBehaviour
             questVerdict.text = "THE END";
             details.text = "Game Completion Time " + System.TimeSpan.FromSeconds((int)MainManager.Instance.currentPlayDuration).ToString("c");
             anim.SetTrigger("GameFinished");
-            Time.timeScale = 0;
+            restartTimer += Time.deltaTime;
+            if (restartTimer >= restartDelay)
+            {
+                Reset();
+                Time.timeScale = 0f;
+            }
         }
     }
 

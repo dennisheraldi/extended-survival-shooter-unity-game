@@ -14,6 +14,7 @@ public class MainManager : MonoBehaviour
     public int currentMoney;
     public float currentPlayDuration;
     public bool isQuestOnGoing;
+    public string nextScene;
 
     private void Awake()
     {
