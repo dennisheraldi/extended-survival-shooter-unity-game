@@ -2,24 +2,26 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
     public int startingHealth = 100;                            // The amount of health the player starts the game with.
     public int currentHealth;                                   // The current health the player has.
+    public TextMeshProUGUI healthText;
     public Slider healthSlider;                                 // Reference to the UI's health bar.
     public Image damageImage;                                   // Reference to an image to flash on the screen on being hurt.
     public AudioClip deathClip;                                 // The audio clip to play when the player dies.
     public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
-    public float startTime;
-    public float deathTime;
+    public static float startTime;
+    public static float deathTime;
 
     Animator anim;                                              // Reference to the Animator component.
     AudioSource playerAudio;                                    // Reference to the AudioSource component.
     PlayerMovement playerMovement;                              // Reference to the player's movement.
     PlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
-    public bool isDead;                                                // Whether the player is dead.
+    public static bool isDead;                                                // Whether the player is dead.
     bool damaged;                                               // True when the player gets damaged.
     
 
@@ -30,14 +32,14 @@ public class PlayerHealth : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerMovement>();
         playerShooting = GetComponentInChildren<PlayerShooting>();
-        if (healthSlider == null)
-        {
-            Debug.Log("Health Slider is Null");
-        }
+        
         
         // Set the initial health of the player.
-        currentHealth = startingHealth;
+        currentHealth = MainManager.Instance.currentPlayerHealth;
         startTime = Time.time;
+
+        healthSlider.value = currentHealth;
+        healthText.text = currentHealth.ToString() + "/100";
     }
 
 
@@ -69,8 +71,14 @@ public class PlayerHealth : MonoBehaviour
         // Reduce the current health by the damage amount.
         currentHealth -= amount;
 
+        MainManager.Instance.currentPlayerHealth = currentHealth;
+        Debug.Log(MainManager.Instance.currentPlayerHealth);
+
         // Set the health bar's value to the current health.
         healthSlider.value = currentHealth;
+
+        // Set the health text 
+        healthText.text = currentHealth.ToString() + "/100";
 
         // Play the hurt sound effect.
         playerAudio.Play();
@@ -110,6 +118,8 @@ public class PlayerHealth : MonoBehaviour
     public void RestartLevel()
     {
         // Reload the level that is currently loaded.
-        SceneManager.LoadScene(0);
+        // LastSavedScene 
+        PlayerHealth.isDead = false;
+        SceneManager.LoadScene("MainScene");
     }
 }

@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -30,4 +30,3 @@ public class EnemyManager : MonoBehaviour
         }
     }
 }
-

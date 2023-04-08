@@ -5,32 +5,24 @@ using System;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static int score;
-
-    private float startTime;
-
-    public PlayerHealth playerHealth;
+    
 
     Text text;
-
 
     void Awake ()
     {
         text = GetComponent <Text> ();
-        score = 0;
-        startTime = playerHealth.startTime;
+        
     }
 
 
     void Update ()
     {
-        float currentTime = Time.time - startTime;
-
-        if (playerHealth.isDead)
+        if (MainManager.Instance.isQuestOnGoing)
         {
-            currentTime = playerHealth.deathTime - startTime;
-        }
-        
-        text.text = "Time: " + TimeSpan.FromSeconds((int)currentTime).ToString("c");
+            MainManager.Instance.currentPlayDuration += Time.deltaTime;
+        } 
+
+        text.text = "Time: " + TimeSpan.FromSeconds((int)MainManager.Instance.currentPlayDuration).ToString("c");
     }
 }

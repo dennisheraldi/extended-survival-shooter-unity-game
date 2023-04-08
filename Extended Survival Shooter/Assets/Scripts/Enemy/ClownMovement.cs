@@ -43,7 +43,6 @@ public class ClownMovement : MonoBehaviour
             {
                 if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.75)
                 {
-                    Debug.Log(deathClip);
                     animator.SetBool("isRaging", false); // set the isRageActive parameter to false
                     enemyAudio.clip = originalClip;
                 }
