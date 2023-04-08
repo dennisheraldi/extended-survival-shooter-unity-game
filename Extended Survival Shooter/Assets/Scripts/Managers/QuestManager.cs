@@ -13,6 +13,7 @@ public class QuestManager : MonoBehaviour
     public Text questVerdict;
     public Text details;
     public Text questVerdictText;
+    public Text moneyText;
     public Button SaveProgressButton;
     public Button ContinueWithoutSaving;
     public static int ZombunnyKilled = 0;
@@ -64,7 +65,7 @@ public class QuestManager : MonoBehaviour
     {
         if (PlayerHealth.isDead)
         {
-            Transition("Quest Failed", "GameOver", "MainScene");
+            Transition("Quest Failed", "GameOver", "MainScene", 0);
         }
         else
         {
@@ -92,12 +93,14 @@ public class QuestManager : MonoBehaviour
     {
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 1: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/3)";
+        moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
         if (totalKill == 3)
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 2;
             MainManager.Instance.nextScene = "TransitionQuest1";
-            Transition("Quest 1 Completed", "QuestCompleted", "TransitionQuest1");
+            questVerdictText.text = "Reward: +200 Money";
+            Transition("Quest 1 Completed", "QuestCompleted", "TransitionQuest1", 200);
         }
 
     }
@@ -106,12 +109,14 @@ public class QuestManager : MonoBehaviour
     {
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 2: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/6)";
+        moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
         if (totalKill == 6)
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 3;
             MainManager.Instance.nextScene = "MainScene";
-            Transition("Quest 2 Completed", "QuestCompleted", "MainScene");
+            questVerdictText.text = "Reward: +500 Money";
+            Transition("Quest 2 Completed", "QuestCompleted", "MainScene", 500);
         }
     }
 
@@ -119,12 +124,14 @@ public class QuestManager : MonoBehaviour
     {
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 3: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/9)";
+        moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
         if (totalKill == 9)
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 4;
             MainManager.Instance.nextScene = "MainScene";
-            Transition("Quest 3 Completed", "QuestCompleted", "MainScene");
+            questVerdictText.text = "Reward: +1000 Money";
+            Transition("Quest 3 Completed", "QuestCompleted", "MainScene", 1000);
         }
     }
 
@@ -132,6 +139,7 @@ public class QuestManager : MonoBehaviour
     {
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 4: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/12)";
+        moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
         if (totalKill == 12)
         {
             MainManager.Instance.isQuestOnGoing = false;
@@ -147,7 +155,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    void Transition(string verdictText, string trigger, string continueToScene)
+    void Transition(string verdictText, string trigger, string continueToScene, int obtainedMoney)
     {
         questVerdict.text = verdictText;
         anim.SetTrigger(trigger);
@@ -157,21 +165,31 @@ public class QuestManager : MonoBehaviour
         {
             questVerdictText.text = "Back to main menu in " + (restartDelay - restartTimer).ToString("0") + " seconds";
         }
-
-        if (restartTimer >= restartDelay)
+        
+        if (trigger == "GameOver")
         {
-            if (trigger == "GameOver")
+            if (restartTimer >= restartDelay)
             {
-#if UNITY_EDITOR
-                EditorApplication.isPlaying = false;
-#else
-		        Application.Quit();
-#endif
+                #if UNITY_EDITOR
+                    EditorApplication.isPlaying = false;
+                #else
+		            Application.Quit();
+                #endif
+                
             }
-
-            Reset();
-            Time.timeScale = 0f;
+        } else if(trigger == "QuestCompleted")
+        {
+            StartCoroutine(UpdatePhase(obtainedMoney));
         }
+    }
+
+    IEnumerator UpdatePhase(int obtainedMoney)
+    {
+        // Update money
+        MainManager.Instance.currentMoney += obtainedMoney;
+        Reset();
+        yield return new WaitForSeconds(2);
+        Time.timeScale = 0f;
     }
 
     private void Reset()
