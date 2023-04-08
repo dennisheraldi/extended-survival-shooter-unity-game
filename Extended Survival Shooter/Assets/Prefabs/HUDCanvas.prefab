@@ -466,7 +466,6 @@ GameObject:
   - component: {fileID: 114086377265364948}
   - component: {fileID: 114391773010768608}
   - component: {fileID: 95713256148318574}
-  - component: {fileID: 114540646783116280}
   - component: {fileID: 4610694192997309974}
   m_Layer: 5
   m_Name: HUDCanvas
@@ -586,20 +585,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &114540646783116280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1459372703440148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9c9e0011c2ed97428a4efc03b455359, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealth: {fileID: 0}
-  restartDelay: 5
 --- !u!114 &4610694192997309974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,6 +598,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questText: {fileID: 0}
+  questVerdict: {fileID: 0}
+  details: {fileID: 0}
+  restartDelay: 3
+  anim: {fileID: 0}
 --- !u!1 &1599483560076320
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,7 +824,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e378bc199fbd343bceabbd3a16d73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 0}
 --- !u!1 &1819506080465834
 GameObject:
   m_ObjectHideFlags: 0

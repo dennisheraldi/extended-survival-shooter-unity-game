@@ -72,7 +72,6 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= amount;
 
         MainManager.Instance.currentPlayerHealth = currentHealth;
-        Debug.Log(MainManager.Instance.currentPlayerHealth);
 
         // Set the health bar's value to the current health.
         healthSlider.value = currentHealth;

@@ -10,9 +10,12 @@ public class QuestManager : MonoBehaviour
     public Text questText;
     public Text questVerdict;
     public Text details;
+    public Button SaveProgressButton;
+    public Button ContinueWithoutSaving;
     public static int ZombunnyKilled = 0;
     public static int ZombearKilled = 0;
     public static int HellephantKilled = 0;
+    public string nextScene;
 
     public float restartDelay = 3f;
     public Animator anim;
@@ -27,7 +30,6 @@ public class QuestManager : MonoBehaviour
         {
             currentQuest = MainManager.Instance.currentQuest;
             MainManager.Instance.isQuestOnGoing = true;
-
         }
 
         // Set max spawn for enemy
@@ -81,7 +83,7 @@ public class QuestManager : MonoBehaviour
     {
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 1: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/3)";
-        if (totalKill == 3)
+        if (totalKill == 1)
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 2;
@@ -128,16 +130,17 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    void Transition(string verdictText, string trigger, string nextScene)
+    void Transition(string verdictText, string trigger, string continueToScene)
     {
         questVerdict.text = verdictText;
         anim.SetTrigger(trigger);
         restartTimer += Time.deltaTime;
+        nextScene = continueToScene;
 
         if (restartTimer >= restartDelay)
         {
             Reset();
-            SceneManager.LoadScene(nextScene);
+            Time.timeScale = 0f;
         }
     }
 
@@ -146,6 +149,12 @@ public class QuestManager : MonoBehaviour
         ZombearKilled = 0;
         ZombunnyKilled = 0;
         HellephantKilled = 0;
+    }
+
+    public void Continue()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(nextScene);
     }
 
 }
