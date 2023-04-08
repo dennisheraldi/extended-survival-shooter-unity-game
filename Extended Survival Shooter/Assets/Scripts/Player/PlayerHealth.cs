@@ -114,11 +114,11 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-    public void RestartLevel()
+    /*public void RestartLevel()
     {
         // Reload the level that is currently loaded.
         // LastSavedScene 
         PlayerHealth.isDead = false;
         SceneManager.LoadScene("MainScene");
-    }
+    }*/
 }

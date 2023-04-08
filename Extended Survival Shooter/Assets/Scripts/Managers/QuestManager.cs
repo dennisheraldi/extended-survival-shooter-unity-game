@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,15 +12,16 @@ public class QuestManager : MonoBehaviour
     public Text questText;
     public Text questVerdict;
     public Text details;
+    public Text questVerdictText;
     public Button SaveProgressButton;
     public Button ContinueWithoutSaving;
     public static int ZombunnyKilled = 0;
     public static int ZombearKilled = 0;
     public static int HellephantKilled = 0;
     public string nextScene;
-
-    public float restartDelay = 3f;
     public Animator anim;
+
+    float restartDelay;
     float restartTimer;
 
     int currentQuest;
@@ -26,6 +29,10 @@ public class QuestManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        restartDelay = 5f;
+        restartTimer = 0;
+        PlayerHealth.isDead = false;
+
         if (MainManager.Instance != null)
         {
             currentQuest = MainManager.Instance.currentQuest;
@@ -59,23 +66,25 @@ public class QuestManager : MonoBehaviour
         {
             Transition("Quest Failed", "GameOver", "MainScene");
         }
-
-        switch (currentQuest)
+        else
         {
-            case 1:
-                Quest1();
-                break;
-            case 2:
-                Quest2();
-                break;
-            case 3:
-                Quest3();
-                break;
-            case 4:
-                Quest4();
-                break;
-            default:
-                break;
+            switch (currentQuest)
+            {
+                case 1:
+                    Quest1();
+                    break;
+                case 2:
+                    Quest2();
+                    break;
+                case 3:
+                    Quest3();
+                    break;
+                case 4:
+                    Quest4();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -83,7 +92,7 @@ public class QuestManager : MonoBehaviour
     {
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 1: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/3)";
-        if (totalKill == 1)
+        if (totalKill == 3)
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 2;
@@ -97,7 +106,7 @@ public class QuestManager : MonoBehaviour
     {
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 2: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/6)";
-        if (totalKill == 1)
+        if (totalKill == 6)
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 3;
@@ -110,7 +119,7 @@ public class QuestManager : MonoBehaviour
     {
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 3: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/9)";
-        if (totalKill == 1)
+        if (totalKill == 9)
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 4;
@@ -123,7 +132,7 @@ public class QuestManager : MonoBehaviour
     {
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 4: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/12)";
-        if (totalKill == 1)
+        if (totalKill == 12)
         {
             MainManager.Instance.isQuestOnGoing = false;
             questVerdict.text = "THE END";
@@ -144,9 +153,22 @@ public class QuestManager : MonoBehaviour
         anim.SetTrigger(trigger);
         restartTimer += Time.deltaTime;
         nextScene = continueToScene;
+        if (trigger == "GameOver" && (restartDelay - restartTimer) > 1)
+        {
+            questVerdictText.text = "Back to main menu in " + (restartDelay - restartTimer).ToString("0") + " seconds";
+        }
 
         if (restartTimer >= restartDelay)
         {
+            if (trigger == "GameOver")
+            {
+#if UNITY_EDITOR
+                EditorApplication.isPlaying = false;
+#else
+		        Application.Quit();
+#endif
+            }
+
             Reset();
             Time.timeScale = 0f;
         }
@@ -165,4 +187,13 @@ public class QuestManager : MonoBehaviour
         SceneManager.LoadScene(nextScene);
     }
 
+    public void LoadLatestSavedData()
+    {
+        string[] filePaths = Directory.GetFiles(Application.persistentDataPath);
+        string json = File.ReadAllText(filePaths[2]);
+        MainManager.SaveData data = JsonUtility.FromJson<MainManager.SaveData>(json);
+        MainManager.Instance.LoadQuestProgress(data.slotNumber);
+        Reset();
+        SceneManager.LoadScene("MainScene");
+    }
 }

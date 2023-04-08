@@ -71,7 +71,7 @@ public class MainManager : MonoBehaviour
             }
         }
 
-        string fileName = "data_" + slotNumber.ToString() + "_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".json";
+        string fileName = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "_data_" + slotNumber.ToString() + ".json";
         string filePath = Path.Combine(Application.persistentDataPath, fileName);
         File.WriteAllText(filePath, json);
 
@@ -87,13 +87,14 @@ public class MainManager : MonoBehaviour
             {
                 string json = File.ReadAllText(foundFilePath);
                 SaveData data = JsonUtility.FromJson<SaveData>(json);
-
+                // Assign the save data to MainManager Instances
+                currentPlayerHealth = data.currentPlayerHealth;
+                currentQuest = data.currentQuest;
+                currentMoney = data.currentMoney;
+                currentPlayDuration = data.currentPlayDuration;
+                isQuestOnGoing = data.isQuestOnGoing;
             }
         }
-
-        
     }
-
-
 }
 
