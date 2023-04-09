@@ -4759,6 +4759,10 @@ PrefabInstance:
       propertyPath: director
       value: 
       objectReference: {fileID: 669024342}
+    - target: {fileID: 8252744607426645246, guid: d372f093580e0df4e8d4d7b2a0bdabb8, type: 3}
+      propertyPath: nextScene
+      value: MainScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d372f093580e0df4e8d4d7b2a0bdabb8, type: 3}
 --- !u!95 &1174137949 stripped

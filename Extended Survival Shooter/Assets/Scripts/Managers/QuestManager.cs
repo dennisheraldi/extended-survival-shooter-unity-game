@@ -19,6 +19,7 @@ public class QuestManager : MonoBehaviour
     public static int ZombunnyKilled = 0;
     public static int ZombearKilled = 0;
     public static int HellephantKilled = 0;
+    public static int ClownKilled = 0;
     public string nextScene;
     public Animator anim;
 
@@ -116,16 +117,16 @@ public class QuestManager : MonoBehaviour
             MainManager.Instance.currentQuest = 3;
             MainManager.Instance.nextScene = "MainScene";
             questVerdictText.text = "Reward: +500 Money";
-            Transition("Quest 2 Completed", "QuestCompleted", "MainScene", 500);
+            Transition("Quest 2 Completed", "QuestCompleted", "TransitionQuest2", 500);
         }
     }
 
     void Quest3()
     {
-        int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
-        questText.text = "Quest 3: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/9)";
+        int totalKill = ClownKilled;
+        questText.text = "Quest 3: Bunuh Clown (" + totalKill.ToString() + "/1)";
         moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
-        if (totalKill == 9)
+        if (totalKill == 1)
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 4;
@@ -186,9 +187,9 @@ public class QuestManager : MonoBehaviour
     IEnumerator UpdatePhase(int obtainedMoney)
     {
         // Update money
+        yield return new WaitForSeconds(1);
         MainManager.Instance.currentMoney += obtainedMoney;
         Reset();
-        yield return new WaitForSeconds(1);
         Time.timeScale = 0f;
     }
 

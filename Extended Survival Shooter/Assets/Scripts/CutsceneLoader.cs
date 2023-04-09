@@ -9,6 +9,8 @@ public class CutsceneLoader : MonoBehaviour
     public Animator transition;
     public PlayableDirector director;
 
+    public string nextScene;
+
     public float transitionTime = 6f;
 
     // Update is called once per frame
@@ -28,7 +30,7 @@ public class CutsceneLoader : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        StartCoroutine(LoadLevel("MainScene"));
+        StartCoroutine(LoadLevel(nextScene));
     }
 
     IEnumerator LoadLevel(string SceneName)

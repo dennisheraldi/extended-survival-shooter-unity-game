@@ -117,6 +117,9 @@ public class EnemyHealth : MonoBehaviour
             case "Hellephant(Clone)":
                 QuestManager.HellephantKilled++;
                 break;
+            case "Whiteclown N Hallin":
+                QuestManager.ClownKilled++;
+                break;
             default:
                 break;
         }
