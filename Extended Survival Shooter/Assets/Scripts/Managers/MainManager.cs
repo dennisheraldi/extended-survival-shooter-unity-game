@@ -15,6 +15,8 @@ public class MainManager : MonoBehaviour
     public float currentPlayDuration;
     public bool isQuestOnGoing;
     public string nextScene;
+    public bool immunity;
+    public bool instantKill;
 
     private void Awake()
     {
@@ -22,7 +24,9 @@ public class MainManager : MonoBehaviour
         currentMoney = 0;
         currentQuest = 1;
         currentPlayDuration = 0;
+        immunity = false;
         isQuestOnGoing = false;
+        instantKill = false;
         // start of new code
         if (Instance != null)
         {
