@@ -1,0 +1,34 @@
+{
+    "name": "Halo",
+    "maps": [
+        {
+            "name": "COba",
+            "id": "afc6a11a-ff81-4db7-a96e-4c102ddc4f7b",
+            "actions": [
+                {
+                    "name": "Apa",
+                    "type": "Button",
+                    "id": "8cf0e04c-dfc5-4eb3-88d3-63c030aa7770",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9f281c48-bdc6-4be0-8650-3079221b72e2",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Apa",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
