@@ -16,9 +16,6 @@ public class MainManager : MonoBehaviour
     public float gameVolume;
     public bool isQuestOnGoing;
     public string nextScene;
-    public string playerName;
-    public bool immunity;
-    public bool instantKill;
 
     private void Awake()
     {
@@ -26,12 +23,7 @@ public class MainManager : MonoBehaviour
         currentMoney = 0;
         currentQuest = 1;
         currentPlayDuration = 0;
-        gameVolume = 1f;
         isQuestOnGoing = false;
-        playerName = "";
-        immunity = false;
-        isQuestOnGoing = false;
-        instantKill = false;
         // start of new code
         if (Instance != null)
         {
