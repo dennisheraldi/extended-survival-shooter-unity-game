@@ -24,11 +24,6 @@ EditorBuildSettings:
     path: Assets/Scenes/LoadGame.unity
     guid: f82b3bae7c7dbcd4fabb51a21c0970d5
   - enabled: 1
-<<<<<<< Updated upstream
     path: Assets/Scenes/MainMenuScene.unity
     guid: d31061f241d73ef4fb5619e0e6b9e533
-=======
-    path: Assets/Scenes/Quest3.unity
-    guid: 0ca0d8d7c7bb16248bbe1b3c0736cdd2
->>>>>>> Stashed changes
   m_configObjects: {}

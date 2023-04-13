@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
+    public InputField nameField;
+    
     // private string _name;
-    // private float _volume;
+    private float _volume;
     // Start is called before the first frame update
     void Start()
     {
-        // _volume = AudioListener.volume;
+        _volume = AudioListener.volume;
         // if (_name != "")
         // {
         //     nameField.text = _name;
@@ -20,7 +22,7 @@ public class SettingsMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // AudioListener.volume = _volume;
+        AudioListener.volume = _volume;
         // if (_name != "")
         // {
         //     nameField.text = _name;
@@ -35,7 +37,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void UpdateVolume(float volume)
     {
-        AudioListener.volume = volume;
+        _volume = volume;
         MainManager.Instance.gameVolume = volume;
     }
 }

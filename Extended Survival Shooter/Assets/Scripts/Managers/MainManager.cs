@@ -18,7 +18,6 @@ public class MainManager : MonoBehaviour
     public string nextScene;
     public bool immunity;
     public bool instantKill;
-    public string playerName;
 
     private void Awake()
     {
