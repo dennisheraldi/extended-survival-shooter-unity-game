@@ -9,6 +9,7 @@ public class LoadGame : MonoBehaviour
 {
     public Dropdown m_Dropdown;
     int m_Index;
+    int data_counter;
     public Text DropdownLabel;
     public Button LoadGameButton;
 
@@ -32,6 +33,7 @@ public class LoadGame : MonoBehaviour
                 m_NewData1 = new Dropdown.OptionData();
                 m_NewData1.text = data.slotName;
                 m_Messages.Add(m_NewData1);
+                data_counter++;
             }
             else if (Path.GetFileName(foundFilePath).Contains("data_1"))
             {
@@ -40,6 +42,7 @@ public class LoadGame : MonoBehaviour
                 m_NewData2 = new Dropdown.OptionData();
                 m_NewData2.text = data.slotName;
                 m_Messages.Add(m_NewData2);
+                data_counter++;
             }
             else if (Path.GetFileName(foundFilePath).Contains("data_2"))
             {
@@ -48,10 +51,11 @@ public class LoadGame : MonoBehaviour
                 m_NewData3 = new Dropdown.OptionData();
                 m_NewData3.text = data.slotName;
                 m_Messages.Add(m_NewData3);
+                data_counter++;
             }
         }
 
-        if (filePaths.Length == 0)
+        if (data_counter == 0)
         {
             DropdownLabel.text = "None";
             m_Dropdown.interactable = false;
