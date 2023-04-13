@@ -13,8 +13,11 @@ public class MainManager : MonoBehaviour
     public int currentQuest;
     public int currentMoney;
     public float currentPlayDuration;
+    public float gameVolume;
     public bool isQuestOnGoing;
     public string nextScene;
+    public bool immunity;
+    public bool instantKill;
 
     private void Awake()
     {
@@ -22,7 +25,9 @@ public class MainManager : MonoBehaviour
         currentMoney = 0;
         currentQuest = 1;
         currentPlayDuration = 0;
+        immunity = false;
         isQuestOnGoing = false;
+        instantKill = false;
         // start of new code
         if (Instance != null)
         {
@@ -44,7 +49,9 @@ public class MainManager : MonoBehaviour
         public int currentQuest;
         public int currentMoney;
         public float currentPlayDuration;
+        public float gameVolume;
         public bool isQuestOnGoing;
+        public string playerName;
         public string timeSaved;
     }
 
@@ -58,6 +65,7 @@ public class MainManager : MonoBehaviour
         data.currentQuest = currentQuest;
         data.currentMoney = currentMoney;
         data.currentPlayDuration = currentPlayDuration;
+        data.gameVolume = gameVolume;
         data.isQuestOnGoing = isQuestOnGoing;
         string json = JsonUtility.ToJson(data);
 
@@ -92,6 +100,7 @@ public class MainManager : MonoBehaviour
                 currentQuest = data.currentQuest;
                 currentMoney = data.currentMoney;
                 currentPlayDuration = data.currentPlayDuration;
+                gameVolume = data.gameVolume;
                 isQuestOnGoing = data.isQuestOnGoing;
             }
         }
