@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/TransitionQuest2.unity
     guid: 37dffc3c9aafeb74e8832f30bc727569
   - enabled: 1
-    path: Assets/Scenes/Quest3.unity
+    path: Assets/Scenes/q3.unity
     guid: 64db60a89599b374faeb024de69da66a
   - enabled: 1
     path: Assets/Scenes/LoadGame.unity

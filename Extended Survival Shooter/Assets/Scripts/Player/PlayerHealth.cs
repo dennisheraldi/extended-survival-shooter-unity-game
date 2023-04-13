@@ -60,6 +60,10 @@ public class PlayerHealth : MonoBehaviour
 
         // Reset the damaged flag.
         damaged = false;
+        if (QuestManager.TimerQ3.ToString("0.00") == "0.00")
+        {
+            Death();
+        }
     }
 
 
@@ -88,10 +92,11 @@ public class PlayerHealth : MonoBehaviour
             // ... it should die.
             Death();
         }
+  
     }
 
 
-    void Death()
+    public void Death()
     {
         // Set the death flag so this function won't be called again.
         isDead = true;
