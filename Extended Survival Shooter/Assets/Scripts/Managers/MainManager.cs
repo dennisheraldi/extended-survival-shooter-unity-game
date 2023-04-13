@@ -13,8 +13,10 @@ public class MainManager : MonoBehaviour
     public int currentQuest;
     public int currentMoney;
     public float currentPlayDuration;
+    public float gameVolume;
     public bool isQuestOnGoing;
     public string nextScene;
+    public string playerName;
 
     private void Awake()
     {
@@ -22,7 +24,9 @@ public class MainManager : MonoBehaviour
         currentMoney = 0;
         currentQuest = 1;
         currentPlayDuration = 0;
+        gameVolume = 1f;
         isQuestOnGoing = false;
+        playerName = "";
         // start of new code
         if (Instance != null)
         {
@@ -44,7 +48,9 @@ public class MainManager : MonoBehaviour
         public int currentQuest;
         public int currentMoney;
         public float currentPlayDuration;
+        public float gameVolume;
         public bool isQuestOnGoing;
+        public string playerName;
         public string timeSaved;
     }
 
@@ -58,7 +64,9 @@ public class MainManager : MonoBehaviour
         data.currentQuest = currentQuest;
         data.currentMoney = currentMoney;
         data.currentPlayDuration = currentPlayDuration;
+        data.gameVolume = gameVolume;
         data.isQuestOnGoing = isQuestOnGoing;
+        data.playerName = playerName;
         string json = JsonUtility.ToJson(data);
 
         // Mencari data terlebih dahulu kemudian dihapus ketika ditemukan
@@ -92,7 +100,9 @@ public class MainManager : MonoBehaviour
                 currentQuest = data.currentQuest;
                 currentMoney = data.currentMoney;
                 currentPlayDuration = data.currentPlayDuration;
+                gameVolume = data.gameVolume;
                 isQuestOnGoing = data.isQuestOnGoing;
+                playerName = data.playerName;
             }
         }
     }

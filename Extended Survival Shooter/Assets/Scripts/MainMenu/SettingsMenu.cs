@@ -7,35 +7,37 @@ public class SettingsMenu : MonoBehaviour
 {
     public InputField nameField;
     
-    private string _name;
+    // private string _name;
     private float _volume;
     // Start is called before the first frame update
     void Start()
     {
         _volume = AudioListener.volume;
-        if (_name != "")
-        {
-            nameField.text = _name;
-        }
+        // if (_name != "")
+        // {
+        //     nameField.text = _name;
+        // }
     }
 
     // Update is called once per frame
     void Update()
     {
         AudioListener.volume = _volume;
-        if (_name != "")
-        {
-            nameField.text = _name;
-        }
+        // if (_name != "")
+        // {
+        //     nameField.text = _name;
+        // }
     }
 
     public void UpdateName(string username)
     {
-        _name = username;
+        // _name = username;
+        MainManager.Instance.playerName = username;
     }
 
     public void UpdateVolume(float volume)
     {
         _volume = volume;
+        MainManager.Instance.gameVolume = volume;
     }
 }
