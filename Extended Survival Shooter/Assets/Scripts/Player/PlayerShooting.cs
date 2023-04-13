@@ -17,14 +17,19 @@ public class PlayerShooting : MonoBehaviour
     //public Light faceLight;                             // Duh
     float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.             
     public PauseManager pauseManager;
+    PetBuffAction petBuffAction;
+    ParticleSystem BuffParticles;
+    GameObject pet;
 
     void Awake()
     {
+        pet = GameObject.FindGameObjectWithTag("Pet");
         shootableMask = LayerMask.GetMask("Shootable");
         gunParticles = GetComponent<ParticleSystem>();
         gunLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
         gunLight = GetComponent<Light>();
+        petBuffAction = pet.GetComponent<PetBuffAction>();
     }
 
     void Update()
@@ -83,7 +88,15 @@ public class PlayerShooting : MonoBehaviour
                 }
                 else
                 {
-                enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                    if (petBuffAction.buffed == true)
+                    {
+                        int damageBuff = petBuffAction.buffDamage;
+                        enemyHealth.TakeDamage(damageBuff, shootHit.point);
+                    }
+                    else
+                    {
+                        enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                    }
                 }
             }
 

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - HealthText
+  - Pet
   layers:
   - Default
   - TransparentFX
