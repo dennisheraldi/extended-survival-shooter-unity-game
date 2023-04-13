@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
 {
@@ -106,6 +107,22 @@ public class MainManager : MonoBehaviour
                 isQuestOnGoing = data.isQuestOnGoing;
                 playerName = data.playerName;
             }
+        }
+    }
+
+    public void LoadGameByQuest()
+    {
+        if (MainManager.Instance.currentQuest == 1 || MainManager.Instance.currentQuest == 2)
+        {
+            SceneManager.LoadScene("MainScene");
+        }
+        else if (MainManager.Instance.currentQuest == 3)
+        {
+            SceneManager.LoadScene("Quest3");
+        }
+        else if (MainManager.Instance.currentQuest == 4)
+        {
+            SceneManager.LoadScene("Quest4");
         }
     }
 }

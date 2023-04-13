@@ -250,6 +250,7 @@ public class QuestManager : MonoBehaviour
         MainManager.SaveData data = JsonUtility.FromJson<MainManager.SaveData>(json);
         MainManager.Instance.LoadQuestProgress(data.slotNumber);
         Reset();
-        SceneManager.LoadScene("MainScene");
+        MainManager.Instance.LoadGameByQuest();
+
     }
 }
