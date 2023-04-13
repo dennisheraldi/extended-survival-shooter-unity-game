@@ -7,6 +7,9 @@ public class SettingsMenu : MonoBehaviour
 {
     // private string _name;
     // private float _volume;
+    public Text NamePlaceholder;
+    public Text InputtedName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +18,9 @@ public class SettingsMenu : MonoBehaviour
         // {
         //     nameField.text = _name;
         // }
+        MainManager.Instance.LoadSettingsPreferences();
+        NamePlaceholder.text = MainManager.Instance.playerName;
+        InputtedName.text = MainManager.Instance.playerName;
     }
 
     // Update is called once per frame
@@ -31,11 +37,13 @@ public class SettingsMenu : MonoBehaviour
     {
         // _name = username;
         MainManager.Instance.playerName = username;
+        MainManager.Instance.SaveSettingsPreferences();
     }
 
     public void UpdateVolume(float volume)
     {
         AudioListener.volume = volume;
         MainManager.Instance.gameVolume = volume;
+        MainManager.Instance.SaveSettingsPreferences();
     }
 }

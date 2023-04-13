@@ -30,6 +30,7 @@ public class MainManager : MonoBehaviour
         immunity = false;
         isQuestOnGoing = false;
         instantKill = false;
+        playerName = "player";
         // start of new code
         if (Instance != null)
         {
@@ -39,6 +40,8 @@ public class MainManager : MonoBehaviour
         // end of new code
 
         Instance = this;
+
+        MainManager.Instance.LoadSettingsPreferences();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -125,5 +128,35 @@ public class MainManager : MonoBehaviour
             SceneManager.LoadScene("Quest4");
         }
     }
+
+    public void SaveSettingsPreferences()
+    {
+        SaveData data = new SaveData();
+        data.gameVolume = gameVolume;
+        data.playerName = playerName;
+        string json = JsonUtility.ToJson(data);
+        string fileName = "settings_preferences.json";
+        string filePath = Path.Combine(Application.persistentDataPath, fileName);
+        File.WriteAllText(filePath, json);
+    }
+
+
+    public void LoadSettingsPreferences()
+    {
+        // Read data from external files
+        string[] filePaths = Directory.GetFiles(Application.persistentDataPath);
+        foreach (string foundFilePath in filePaths)
+        {
+            if (Path.GetFileName(foundFilePath).Contains("settings_preferences"))
+            {
+                string json = File.ReadAllText(foundFilePath);
+                SaveData data = JsonUtility.FromJson<SaveData>(json);
+                // Assign the save data to MainManager Instances
+                playerName = data.playerName;
+                gameVolume = data.gameVolume;
+            }
+        }
+    }
+
 }
 
