@@ -77,7 +77,14 @@ public class PlayerShooting : MonoBehaviour
 
             if (enemyHealth != null)
             {
+                if (MainManager.Instance.instantKill == true)
+                {
+                    enemyHealth.TakeDamage(1000, shootHit.point);
+                }
+                else
+                {
                 enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                }
             }
 
             gunLine.SetPosition(1, shootHit.point);

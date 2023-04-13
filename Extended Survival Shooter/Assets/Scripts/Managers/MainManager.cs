@@ -18,6 +18,7 @@ public class MainManager : MonoBehaviour
     public string nextScene;
     public bool immunity;
     public bool instantKill;
+    public string playerName;
 
     private void Awake()
     {
@@ -67,6 +68,7 @@ public class MainManager : MonoBehaviour
         data.currentPlayDuration = currentPlayDuration;
         data.gameVolume = gameVolume;
         data.isQuestOnGoing = isQuestOnGoing;
+        data.playerName = playerName;
         string json = JsonUtility.ToJson(data);
 
         // Mencari data terlebih dahulu kemudian dihapus ketika ditemukan
@@ -102,6 +104,7 @@ public class MainManager : MonoBehaviour
                 currentPlayDuration = data.currentPlayDuration;
                 gameVolume = data.gameVolume;
                 isQuestOnGoing = data.isQuestOnGoing;
+                playerName = data.playerName;
             }
         }
     }
