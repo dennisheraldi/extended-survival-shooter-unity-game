@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public InputField NameField;
+    public InputField nameField;
     
     private string _name;
     private float _volume;
@@ -15,7 +15,7 @@ public class SettingsMenu : MonoBehaviour
         _volume = AudioListener.volume;
         if (_name != "")
         {
-            NameField.text = _name;
+            nameField.text = _name;
         }
     }
 
@@ -25,7 +25,7 @@ public class SettingsMenu : MonoBehaviour
         AudioListener.volume = _volume;
         if (_name != "")
         {
-            NameField.text = _name;
+            nameField.text = _name;
         }
     }
 
