@@ -952,7 +952,7 @@ PrefabInstance:
       objectReference: {fileID: 2120364160}
     - target: {fileID: 8252744607426645246, guid: d372f093580e0df4e8d4d7b2a0bdabb8, type: 3}
       propertyPath: nextScene
-      value: Quest3
+      value: Quest4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d372f093580e0df4e8d4d7b2a0bdabb8, type: 3}
@@ -3072,6 +3072,20 @@ PlayableDirector:
   - key: {fileID: -584601035272738526, guid: 84acaadbe8530c6438382269809bb123, type: 2}
     value: {fileID: 0}
   - key: {fileID: 2600383722981961044, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3395417471964813486, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 1142423565}
+  - key: {fileID: -4098586362258287297, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 554474201}
+  - key: {fileID: -4280602248020912310, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 337036673}
+  - key: {fileID: -7603017233422339158, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6037212389366811587, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 700669117}
+  - key: {fileID: -9034360774069887577, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 545905983935673962, guid: 84acaadbe8530c6438382269809bb123, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References: []

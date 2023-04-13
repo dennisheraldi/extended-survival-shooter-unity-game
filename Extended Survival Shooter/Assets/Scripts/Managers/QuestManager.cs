@@ -42,7 +42,7 @@ public class QuestManager : MonoBehaviour
         restartDelay = 5f;
         restartTimer = 0;
         PlayerHealth.isDead = false;
-        TimerQ3 = 5f;
+        TimerQ3 = 30f;
         
 
         if (MainManager.Instance != null)
@@ -110,13 +110,13 @@ public class QuestManager : MonoBehaviour
         questText.text = "Quest 1: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/3)";
         moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
         TimerTxt.text = "";
-        if (totalKill == 3)
+        if (totalKill == 1)
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 2;
             MainManager.Instance.nextScene = "TransitionQuest1";
             questVerdictText.text = "Reward: +200 Money";
-            Transition("Quest 1 Completed", "QuestCompleted", "TransitionQuest1", 200);
+            Transition("Quest 1 Completed", "QuestCompleted", "TransitionQuest1ToQuest2", 200);
         }
 
     }
@@ -127,18 +127,19 @@ public class QuestManager : MonoBehaviour
         questText.text = "Quest 2: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/6)";
         moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
         TimerTxt.text = "";
-        if (totalKill == 6)
+        if (totalKill == 1)
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 3;
             MainManager.Instance.nextScene = "MainScene";
             questVerdictText.text = "Reward: +500 Money";
-            Transition("Quest 2 Completed", "QuestCompleted", "TransitionQuest2", 500);
+            Transition("Quest 2 Completed", "QuestCompleted", "Quest3", 500);
         }
     }
 
     void Quest3()
     {
+        TimerTxt.gameObject.SetActive(true);
         timeCount = Time.deltaTime;
         TimerQ3 -= timeCount;
         TimerTxt.text = "Zombie Membuatmu sesak! \n Waktu tersisa : " + TimerQ3.ToString("0.00");
@@ -152,14 +153,15 @@ public class QuestManager : MonoBehaviour
             MainManager.Instance.currentQuest = 4;
             MainManager.Instance.nextScene = "MainScene";
             questVerdictText.text = "Reward: +1000 Money";
-            Transition("Quest 3 Completed", "QuestCompleted", "MainScene", 1000);
+            Transition("Quest 3 Completed", "QuestCompleted", "TransitionQuest3ToQuest4", 1000);
         }
     }
 
     void Quest4()
     {
+        TimerTxt.gameObject.SetActive(false);
         int totalKill = ClownKilled;
-        questText.text = "Quest 3: Bunuh Clown (" + totalKill.ToString() + "/1)";
+        questText.text = "Quest 4: Bunuh Clown (" + totalKill.ToString() + "/1)";
         moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
         if (totalKill == 1)
         {
