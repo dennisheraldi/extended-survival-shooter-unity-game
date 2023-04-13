@@ -3027,7 +3027,7 @@ PlayableDirector:
   m_GameObject: {fileID: 2120364158}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 8090993418cac43419c7941a6af20dcb, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 84acaadbe8530c6438382269809bb123, type: 2}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -3047,6 +3047,32 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 6037212389366811587, guid: 8090993418cac43419c7941a6af20dcb, type: 2}
     value: {fileID: 700669117}
+  - key: {fileID: 4642440109642345255, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8289497918338745459, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3503873165918438828, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2276622041131512287, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8968120513636679400, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -1158820778371286436, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -1483707201805339596, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -2258156054473516897, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1979102493321224455, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 32387363139688032, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -1839330268652640869, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -584601035272738526, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2600383722981961044, guid: 84acaadbe8530c6438382269809bb123, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &2120364161
