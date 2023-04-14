@@ -20,8 +20,6 @@ public class MainManager : MonoBehaviour
     public bool immunity;
     public bool instantKill;
     public string playerName;
-    public bool immunity;
-    public bool instantKill;
 
     private void Awake()
     {
@@ -31,7 +29,6 @@ public class MainManager : MonoBehaviour
         currentPlayDuration = 0;
         immunity = false;
         isQuestOnGoing = false;
-        instantKill = false;
         playerName = "player";
         instantKill = false;
         // start of new code
