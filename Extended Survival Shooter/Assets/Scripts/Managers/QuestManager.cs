@@ -155,6 +155,7 @@ public class QuestManager : MonoBehaviour
             MainManager.Instance.currentQuest = 4;
             MainManager.Instance.nextScene = "MainScene";
             questVerdictText.text = "Reward: +1000 Money";
+            TimerTxt.gameObject.SetActive(false);
             Transition("Quest 3 Completed", "QuestCompleted", "TransitionQuest3ToQuest4", 1000);
         }
     }
