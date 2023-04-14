@@ -1036,6 +1036,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 290160696}
   m_CullTransparentMesh: 1
+--- !u!1 &300867874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 300867875}
+  - component: {fileID: 300867876}
+  m_Layer: 5
+  m_Name: ScoreEntry
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &300867875
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300867874}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 93331575018422839}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &300867876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300867874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c172d16387d3e3419e80a95a7c69981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rank: {fileID: 0}
+  username: {fileID: 0}
+  score: {fileID: 0}
 --- !u!1001 &317643702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2578,7 +2630,7 @@ RectTransform:
   m_Children:
   - {fileID: 1970858379}
   m_Father: {fileID: 93331575018422839}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5452,6 +5504,7 @@ RectTransform:
   - {fileID: 93331575582496421}
   - {fileID: 93331575954096316}
   - {fileID: 93331574476445392}
+  - {fileID: 300867875}
   - {fileID: 1059426947}
   m_Father: {fileID: 1455904072}
   m_RootOrder: 4
@@ -5681,5 +5734,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b21f598e1a2b82a428404c4069842226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreEntry: {fileID: 0}
-  scoreUtility: {fileID: 0}
+  scoreEntry: {fileID: 300867876}
+  scoreUtility: {fileID: 93331574476445393}

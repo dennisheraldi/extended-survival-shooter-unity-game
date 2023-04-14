@@ -13,7 +13,7 @@ public class ScoreUtility : MonoBehaviour
         var scoreJson = PlayerPrefs.GetString("scores", "{}");
         _scoreData = JsonUtility.FromJson<ScoreData>(scoreJson);
     }
-    
+
     private void OnDestroy()
     {
         SaveScore();
