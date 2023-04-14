@@ -3237,6 +3237,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4593062459211755684, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: chargeSlider
+      value: 
+      objectReference: {fileID: 1747935784}
+    - target: {fileID: 4593062460117496866, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: arrow
+      value: 
+      objectReference: {fileID: 2091772227467305257, guid: 802986766a97b4a108b97eb5fdf6e02f, type: 3}
+    - target: {fileID: 4593062460117496866, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: chargeSlider
+      value: 
+      objectReference: {fileID: 1747935784}
     - target: {fileID: 7076466232322109540, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
       propertyPath: arrow
       value: 
