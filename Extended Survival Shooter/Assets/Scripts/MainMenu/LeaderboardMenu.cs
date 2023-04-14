@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LeaderboardMenu : MonoBehaviour
 {
@@ -24,5 +25,10 @@ public class LeaderboardMenu : MonoBehaviour
             entry.username.text = scores[i].username;
             entry.score.text = scores[i].score.ToString();
         }
+    }
+
+    public void ShowMainMenu()
+    {
+        SceneManager.LoadScene("MainMenuScene");
     }
 }
