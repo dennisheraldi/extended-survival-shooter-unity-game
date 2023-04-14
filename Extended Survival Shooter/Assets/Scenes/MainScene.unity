@@ -3237,10 +3237,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4593062458578131782, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593062459134557854, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4593062459211755684, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
       propertyPath: chargeSlider
       value: 
       objectReference: {fileID: 1747935784}
+    - target: {fileID: 4593062460117496864, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4593062460117496866, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
       propertyPath: arrow
       value: 

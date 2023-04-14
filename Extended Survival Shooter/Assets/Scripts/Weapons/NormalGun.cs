@@ -32,7 +32,6 @@ public class NormalGun : MonoBehaviour
         gunLine = gunBarrel.GetComponent<LineRenderer>();
         gunAudio = gunBarrel.GetComponent<AudioSource>();
         gunLight = gunBarrel.GetComponent<Light>();
-        gunLine.enabled = false;
     }
 
     void Update()
@@ -62,6 +61,10 @@ public class NormalGun : MonoBehaviour
         gunLight.enabled = false;
     }
 
+    public void CleanGunLine() {
+        gunLine.positionCount = 0;
+    }
+
     void Shoot()
     {
         timer = 0f;
@@ -74,7 +77,11 @@ public class NormalGun : MonoBehaviour
         gunParticles.Stop();
         gunParticles.Play();
 
+        gunLine.material = new Material(Shader.Find("Sprites/Default"));
         gunLine.enabled = true;
+        gunLine.startColor = Color.yellow;
+        gunLine.endColor = Color.yellow;
+        gunLine.positionCount = 2;
         gunLine.SetPosition(0, gunBarrel.transform.position);
 
         shootRay.origin = gunBarrel.transform.position;

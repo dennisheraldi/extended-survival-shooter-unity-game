@@ -37,23 +37,25 @@ public class Shotgun : MonoBehaviour
         gunLight = gunBarrel.GetComponent<Light>();
 
         gunLines = new List<LineRenderer>();
-
-        for (int i = 0; i < (bullets + bulletVariation) * 2; i++) {
-            LineRenderer gunLine = new GameObject().AddComponent<LineRenderer>() as LineRenderer;
-            gunLines.Add(gunLine);
-            if (i < bullets + bulletVariation) {
-                gunLine.name = "GunLine" + i;
-            } else {
-                gunLine.name = "GunLineExtra" + (i - (bullets + bulletVariation));
-            }
-            gunLine.startWidth = 0.05f;
-            gunLine.endWidth = 0.05f;
-            gunLine.material = new Material(Shader.Find("Sprites/Default"));
-        }
     }
 
     void Update()
     {
+        if (gunLines.Count == 0) {
+            for (int i = 0; i < (bullets + bulletVariation) * 2; i++) {
+                LineRenderer gunLine = new GameObject().AddComponent<LineRenderer>() as LineRenderer;
+                gunLines.Add(gunLine);
+                if (i < bullets + bulletVariation) {
+                    gunLine.name = "GunLine" + i;
+                } else {
+                    gunLine.name = "GunLineExtra" + (i - (bullets + bulletVariation));
+                }
+                gunLine.startWidth = 0.05f;
+                gunLine.endWidth = 0.05f;
+                gunLine.material = new Material(Shader.Find("Sprites/Default"));
+            }
+        }
+
         // Add the time since Update was last called to the timer.
         timer += Time.deltaTime;
 
@@ -93,6 +95,7 @@ public class Shotgun : MonoBehaviour
         int bulletsShot = Random.Range(gunLines.Count/2 - 2 * bulletVariation, gunLines.Count/2 - bulletVariation);
 
         for (int i = 0; i < bulletsShot; i++) {
+            gunLines[i].material = new Material(Shader.Find("Sprites/Default"));
             gunLines[i].enabled = true;
             gunLines[i].startColor = Color.red;
             gunLines[i].endColor = Color.green;

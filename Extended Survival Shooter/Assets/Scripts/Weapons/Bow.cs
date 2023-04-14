@@ -35,7 +35,6 @@ public class Bow : MonoBehaviour
         gunAudio = gunBarrel.GetComponent<AudioSource>();
 
         gunLine.material = new Material(Resources.Load("PredictionLine", typeof(Material)) as Material);
-        gunLine.enabled = false;
     }
 
     void Update()
@@ -58,6 +57,7 @@ public class Bow : MonoBehaviour
 
         if (Input.GetButtonUp("Fire1")) {
             // StopAllCoroutines();
+            CleanGunLine();
             StartCoroutine(Coroutine_Movement(time, v0, power));
             shot = true;
         }
@@ -74,7 +74,10 @@ public class Bow : MonoBehaviour
     }
 
     void DrawPath(out float time, out float v0, float power, float angle, int stepCount) {
+        gunLine.material = new Material(Resources.Load("PredictionLine", typeof(Material)) as Material);
         gunLine.enabled = true;
+        gunLine.startColor = Color.white;
+        gunLine.endColor = Color.white;
         
         Vector3 direction = gunBarrel.transform.forward;
 
@@ -97,6 +100,10 @@ public class Bow : MonoBehaviour
         }
         gunLine.positionCount = stepCount + 1;
         gunLine.SetPositions(positions);
+    }
+
+    public void CleanGunLine() {
+        gunLine.positionCount = 0;
     }
 
     IEnumerator Coroutine_Movement(float time, float v0, float power) {

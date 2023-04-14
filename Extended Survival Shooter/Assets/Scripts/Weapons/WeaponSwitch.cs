@@ -70,18 +70,22 @@ public class WeaponSwitch : MonoBehaviour
     }
 
     void Select(int weaponIndex) {
-        for (int i = 0; i < weapons.Length; i++) {
-            weapons[i].gameObject.SetActive(i == weaponIndex);
-        }
-
-        time = 0f;
-
-        // bow
+        // bow UI
         if (weaponIndex == 2) {
             chargeSlider.gameObject.SetActive(true);
         } else {
             chargeSlider.gameObject.SetActive(false);
         }
+        
+        // clean gunline
+        Bow bow = weapons[2].gameObject.GetComponent<Bow>();
+        bow.CleanGunLine();
+
+        for (int i = 0; i < weapons.Length; i++) {
+            weapons[i].gameObject.SetActive(i == weaponIndex);
+        }
+
+        time = 0f;
     }
 
     public void Disable() {

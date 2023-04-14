@@ -16,7 +16,7 @@ public class Arrow : MonoBehaviour
 
     void Update() {
         timer += Time.deltaTime;
-        if (hit || timer >= time) {
+        if (hit || timer >= time + 0.5f) {
             Destroy(gameObject);
         }
     }
