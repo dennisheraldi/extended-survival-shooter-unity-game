@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,7 @@ public class QuestManager : MonoBehaviour
     public Text moneyText;
     public Button SaveProgressButton;
     public Button ContinueWithoutSaving;
+    public Button RestartButton;
     public static int ZombunnyKilled = 0;
     public static int ZombearKilled = 0;
     public static int HellephantKilled = 0;
@@ -208,11 +210,8 @@ public class QuestManager : MonoBehaviour
         {
             if (restartTimer >= restartDelay)
             {
-                #if UNITY_EDITOR
-                    EditorApplication.isPlaying = false;
-                #else
-		            Application.Quit();
-                #endif
+                Destroy(MainManager.Instance.gameObject);
+                SceneManager.LoadScene("MainMenuScene");
                 
             }
         } else if(trigger == "QuestCompleted")
@@ -246,11 +245,27 @@ public class QuestManager : MonoBehaviour
     public void LoadLatestSavedData()
     {
         string[] filePaths = Directory.GetFiles(Application.persistentDataPath);
-        string json = File.ReadAllText(filePaths[2]);
-        MainManager.SaveData data = JsonUtility.FromJson<MainManager.SaveData>(json);
-        MainManager.Instance.LoadQuestProgress(data.slotNumber);
-        Reset();
-        MainManager.Instance.LoadGameByQuest();
+        string latestSavedData = "";
+        foreach (string filePathName in filePaths)
+        {
+            if (Path.GetFileName(filePathName).Contains("data_"))
+            {
+                latestSavedData = filePathName;
+            }
+        }
+
+        if (latestSavedData != "")
+        {
+            string json = File.ReadAllText(latestSavedData);
+            MainManager.SaveData data = JsonUtility.FromJson<MainManager.SaveData>(json);
+            MainManager.Instance.LoadQuestProgress(data.slotNumber);
+            Reset();
+            MainManager.Instance.LoadGameByQuest();
+        } else
+        {
+            RestartButton.interactable = false;
+        }
+        
 
     }
 }
