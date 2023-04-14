@@ -96,7 +96,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void StartSinking()
     {
-        // Find and disable the Nav Mesh Agent.
+        // Find and disable the Nav Mesh Agent. 
         GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
 
         // Find the rigidbody component and make it kinematic (since we use Translate to sink the enemy).

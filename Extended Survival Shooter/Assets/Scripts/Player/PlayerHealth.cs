@@ -11,9 +11,11 @@ public class PlayerHealth : MonoBehaviour
     public TextMeshProUGUI healthText;
     public Slider healthSlider;                                 // Reference to the UI's health bar.
     public Image damageImage;                                   // Reference to an image to flash on the screen on being hurt.
+    public Image healImage;                                   // Reference to an image to flash on the screen on being hurt.
     public AudioClip deathClip;                                 // The audio clip to play when the player dies.
     public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
+    
     public static float startTime;
     public static float deathTime;
 
@@ -24,6 +26,11 @@ public class PlayerHealth : MonoBehaviour
     public static bool isDead;                                                // Whether the player is dead.
     bool damaged;                                               // True when the player gets damaged.
     
+    ParticleSystem HealParticles;                // Reference to the particle system that plays when the enemy is damaged.
+    GameObject gunObject;
+    PetBuffHealth petBuffHealth;
+    
+    
 
     void Awake()
     {
@@ -32,11 +39,14 @@ public class PlayerHealth : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerMovement>();
         weaponSwitch = GetComponentInChildren<WeaponSwitch>();
-        
+        HealParticles = GetComponentsInChildren<ParticleSystem>()[1];
+
+        gunObject = GameObject.Find("GunBarrelEnd");
         
         // Set the initial health of the player.
         currentHealth = MainManager.Instance.currentPlayerHealth;
         startTime = Time.time;
+        gunObject = GameObject.Find("GunBarrelEnd");
 
         healthSlider.value = currentHealth;
         healthText.text = currentHealth.ToString() + "/100";

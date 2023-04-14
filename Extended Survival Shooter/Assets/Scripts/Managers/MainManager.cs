@@ -29,8 +29,8 @@ public class MainManager : MonoBehaviour
         currentPlayDuration = 0;
         immunity = false;
         isQuestOnGoing = false;
-        instantKill = false;
         playerName = "player";
+        instantKill = false;
         // start of new code
         if (Instance != null)
         {
