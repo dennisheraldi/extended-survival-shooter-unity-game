@@ -6,13 +6,17 @@ public class Arrow : MonoBehaviour
 {
     BoxCollider boxCollider;
     bool hit = false;
+    public float time;
+    float timer;
 
-    void Start() {
+    void Awake() {
+        timer = 0f;
         boxCollider = GetComponent<BoxCollider>();
     }
 
     void Update() {
-        if (hit) {
+        timer += Time.deltaTime;
+        if (hit || timer >= time) {
             Destroy(gameObject);
         }
     }
