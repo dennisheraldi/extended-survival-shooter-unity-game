@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Shotgun : MonoBehaviour
 {
-    public int damagePerShot = 20;              
-    public float timeBetweenBullets = 0.15f;       
+    public int damagePerShot = 15;              
+    public float timeBetweenBullets = 0.5f;       
 
     float timer;                                    
     Ray shootRay;                                   
@@ -15,6 +15,8 @@ public class Shotgun : MonoBehaviour
     AudioSource gunAudio;                           
     Light gunLight;                                 
     float effectsDisplayTime = 0.2f;
+
+    Animator anim;
 
     GameObject gunBarrel;
 
@@ -35,6 +37,7 @@ public class Shotgun : MonoBehaviour
         gunParticles = gunBarrel.GetComponent<ParticleSystem>();
         gunAudio = gunBarrel.GetComponent<AudioSource>();
         gunLight = gunBarrel.GetComponent<Light>();
+        anim = GetComponentInChildren<Animator>();
 
         gunLines = new List<LineRenderer>();
     }
@@ -91,6 +94,7 @@ public class Shotgun : MonoBehaviour
 
         gunParticles.Stop();
         gunParticles.Play();
+        anim.SetTrigger("Shot");
 
         int bulletsShot = Random.Range(gunLines.Count/2 - 2 * bulletVariation, gunLines.Count/2 - bulletVariation);
 

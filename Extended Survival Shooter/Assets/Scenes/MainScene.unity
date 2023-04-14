@@ -1597,6 +1597,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -14, y: -4}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1028664395 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4593062459811903014, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+  m_PrefabInstance: {fileID: 7076466232351607275}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1028664399
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028664395}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ceb9560d855c54ae7b6d69d217239cb5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1042569651 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4387082748050925262, guid: 07359941ee957c64182120edb58b9184, type: 3}
@@ -1624,7 +1650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1176459319
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2017,6 +2043,32 @@ MonoBehaviour:
   unpaused: {fileID: 24500003, guid: 5b84db49d40ea449aa4f3e3bd229ab5b, type: 2}
   QuestText: {fileID: 1042569651}
   canvas: {fileID: 1239888048}
+--- !u!1 &1240989283 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4591896621870030504, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+  m_PrefabInstance: {fileID: 7076466232351607275}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1240989287
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240989283}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c68021bb3c81345f887c1662351d3345, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1370974558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3241,6 +3293,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4593062458578131800, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: damagePerShot
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593062458578131800, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: timeBetweenBullets
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4593062459134557854, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3261,6 +3321,14 @@ PrefabInstance:
       propertyPath: chargeSlider
       value: 
       objectReference: {fileID: 1747935784}
+    - target: {fileID: 4593062460117496866, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: damagePerShot
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593062460117496866, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: timeBetweenBullets
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7076466232322109540, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
       propertyPath: arrow
       value: 

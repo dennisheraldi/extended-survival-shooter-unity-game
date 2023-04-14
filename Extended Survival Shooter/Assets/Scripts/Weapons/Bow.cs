@@ -5,14 +5,17 @@ using UnityEngine.UI;
 
 public class Bow : MonoBehaviour
 {
-    public int damagePerShot = 20;              
-    public float timeBetweenBullets = 3f;       
+    public int damagePerShot = 100;              
+    public float timeBetweenBullets = 1f;       
 
-    float timer, timerPower;                                                         
+    float timer = 1f;
+    float timerPower;                                                         
     ParticleSystem gunParticles;  
     LineRenderer gunLine;                                
     AudioSource gunAudio;                                                     
     float effectsDisplayTime = 0.2f;
+
+    Animator anim;
 
     GameObject gunBarrel;
 
@@ -35,6 +38,7 @@ public class Bow : MonoBehaviour
         gunParticles = gunBarrel.GetComponent<ParticleSystem>();
         gunLine = gunBarrel.GetComponent<LineRenderer>();
         gunAudio = gunBarrel.GetComponent<AudioSource>();
+        anim = GetComponentInChildren<Animator>();
 
         gunLine.material = new Material(Resources.Load("PredictionLine", typeof(Material)) as Material);
     }
@@ -123,6 +127,7 @@ public class Bow : MonoBehaviour
 
         gunParticles.Stop();
         gunParticles.Play();
+        anim.SetTrigger("Flip");
 
         Vector3 startPosition = gunBarrel.transform.position;
         Vector3 direction = gunBarrel.transform.forward;
