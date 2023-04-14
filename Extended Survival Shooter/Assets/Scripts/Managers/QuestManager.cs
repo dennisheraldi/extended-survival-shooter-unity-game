@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
 {
-
+    PlayerHealth playerHealth;
     public Text questText;
     public Text questVerdict;
     public Text details;
@@ -16,17 +17,26 @@ public class QuestManager : MonoBehaviour
     public Text moneyText;
     public Button SaveProgressButton;
     public Button ContinueWithoutSaving;
+    public Button RestartButton;
     public static int ZombunnyKilled = 0;
     public static int ZombearKilled = 0;
     public static int HellephantKilled = 0;
+    public static int ZombunnyV2Killed = 0;
+    public static int ZombearV2Killed = 0;
+    public static int HellephantV2Killed = 0;
     public static int ClownKilled = 0;
     public string nextScene;
     public Animator anim;
-
+ 
     float restartDelay;
     float restartTimer;
-
     int currentQuest;
+
+    //Timer materials
+    public Text TimerTxt;
+    //bool isTimerOn = false;
+    public static float TimerQ3;
+    float timeCount;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +44,8 @@ public class QuestManager : MonoBehaviour
         restartDelay = 5f;
         restartTimer = 0;
         PlayerHealth.isDead = false;
+        TimerQ3 = 30f;
+        
 
         if (MainManager.Instance != null)
         {
@@ -64,9 +76,11 @@ public class QuestManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    
         if (PlayerHealth.isDead)
         {
             Transition("Quest Failed", "GameOver", "MainScene", 0);
+            TimerTxt.text = "";
         }
         else
         {
@@ -88,20 +102,23 @@ public class QuestManager : MonoBehaviour
                     break;
             }
         }
+      
     }
 
     void Quest1()
     {
+       
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 1: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/3)";
         moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
-        if (totalKill == 3)
+        TimerTxt.text = "";
+        if (totalKill == 1)
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 2;
             MainManager.Instance.nextScene = "TransitionQuest1";
             questVerdictText.text = "Reward: +200 Money";
-            Transition("Quest 1 Completed", "QuestCompleted", "TransitionQuest1", 200);
+            Transition("Quest 1 Completed", "QuestCompleted", "TransitionQuest1ToQuest2", 200);
         }
 
     }
@@ -111,32 +128,55 @@ public class QuestManager : MonoBehaviour
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 2: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/6)";
         moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
-        if (totalKill == 6)
+        TimerTxt.text = "";
+        if (totalKill == 1)
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 3;
             MainManager.Instance.nextScene = "MainScene";
             questVerdictText.text = "Reward: +500 Money";
-            Transition("Quest 2 Completed", "QuestCompleted", "TransitionQuest2", 500);
+            Transition("Quest 2 Completed", "QuestCompleted", "Quest3", 500);
         }
     }
 
     void Quest3()
     {
-        int totalKill = ClownKilled;
-        questText.text = "Quest 3: Bunuh Clown (" + totalKill.ToString() + "/1)";
+        TimerTxt.gameObject.SetActive(true);
+        timeCount = Time.deltaTime;
+        TimerQ3 -= timeCount;
+        TimerTxt.text = "Zombie Membuatmu sesak! \n Waktu tersisa : " + TimerQ3.ToString("0.00");
+        int totalKill = ZombunnyV2Killed + ZombearV2Killed + HellephantV2Killed;
+        questText.text = "Quest 3: Bunuh Zombies yang ada (" + totalKill.ToString() + "/9)";
         moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
-        if (totalKill == 1)
+
+        if (totalKill == 9)
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 4;
             MainManager.Instance.nextScene = "MainScene";
             questVerdictText.text = "Reward: +1000 Money";
-            Transition("Quest 3 Completed", "QuestCompleted", "MainScene", 1000);
+            TimerTxt.gameObject.SetActive(false);
+            Transition("Quest 3 Completed", "QuestCompleted", "TransitionQuest3ToQuest4", 1000);
         }
     }
 
     void Quest4()
+    {
+        TimerTxt.gameObject.SetActive(false);
+        int totalKill = ClownKilled;
+        questText.text = "Quest 4: Bunuh Clown (" + totalKill.ToString() + "/1)";
+        moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
+        if (totalKill == 1)
+        {
+            MainManager.Instance.isQuestOnGoing = false;
+            MainManager.Instance.currentQuest = 5;
+            MainManager.Instance.nextScene = "MainScene";
+            questVerdictText.text = "Reward: +1000 Money";
+            Transition("Quest 4 Completed", "QuestCompleted", "MainScene", 1000);
+        }
+    }
+
+    void Quest5()
     {
         int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
         questText.text = "Quest 4: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/12)";
@@ -171,11 +211,8 @@ public class QuestManager : MonoBehaviour
         {
             if (restartTimer >= restartDelay)
             {
-                #if UNITY_EDITOR
-                    EditorApplication.isPlaying = false;
-                #else
-		            Application.Quit();
-                #endif
+                Destroy(MainManager.Instance.gameObject);
+                SceneManager.LoadScene("MainMenuScene");
                 
             }
         } else if(trigger == "QuestCompleted")
@@ -209,10 +246,27 @@ public class QuestManager : MonoBehaviour
     public void LoadLatestSavedData()
     {
         string[] filePaths = Directory.GetFiles(Application.persistentDataPath);
-        string json = File.ReadAllText(filePaths[2]);
-        MainManager.SaveData data = JsonUtility.FromJson<MainManager.SaveData>(json);
-        MainManager.Instance.LoadQuestProgress(data.slotNumber);
-        Reset();
-        SceneManager.LoadScene("MainScene");
+        string latestSavedData = "";
+        foreach (string filePathName in filePaths)
+        {
+            if (Path.GetFileName(filePathName).Contains("data_"))
+            {
+                latestSavedData = filePathName;
+            }
+        }
+
+        if (latestSavedData != "")
+        {
+            string json = File.ReadAllText(latestSavedData);
+            MainManager.SaveData data = JsonUtility.FromJson<MainManager.SaveData>(json);
+            MainManager.Instance.LoadQuestProgress(data.slotNumber);
+            Reset();
+            MainManager.Instance.LoadGameByQuest();
+        } else
+        {
+            RestartButton.interactable = false;
+        }
+        
+
     }
 }
