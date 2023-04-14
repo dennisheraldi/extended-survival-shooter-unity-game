@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -11,20 +12,23 @@ public class PauseManager : MonoBehaviour
 
 	public AudioMixerSnapshot paused;
 	public AudioMixerSnapshot unpaused;
-	public Text QuestText;
 
-	public Canvas canvas;
+	public GameObject Panel;
 
 	void Start()
 	{
-		canvas = GetComponent<Canvas>();
+		
 	}
 
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			canvas.enabled = !canvas.enabled;
+			if (Panel.activeSelf) {
+				Panel.SetActive(false);
+			} else {
+				Panel.SetActive(true);
+			} 
 			Pause();
 		}
 	}
@@ -40,23 +44,28 @@ public class PauseManager : MonoBehaviour
 		if (Time.timeScale == 0)
 		{
 			paused.TransitionTo(.01f);
-			QuestText.CrossFadeAlpha(0, 0, true);
 		}
 
 		else
 
 		{
 			unpaused.TransitionTo(.01f);
-			QuestText.CrossFadeAlpha(1, 0, true);
 		}
 	}
 
-	public void Quit()
+	public void BackToMainMenu()
+    {
+		Time.timeScale = 1;
+		Destroy(MainManager.Instance.gameObject);
+		SceneManager.LoadScene("MainMenuScene");
+    }
+
+	/*public void Quit()
 	{
 		#if UNITY_EDITOR
 		EditorApplication.isPlaying = false;
 		#else
 		Application.Quit();
 		#endif
-	}
+	}*/
 }
