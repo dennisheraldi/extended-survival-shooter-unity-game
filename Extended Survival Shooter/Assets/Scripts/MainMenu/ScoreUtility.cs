@@ -6,12 +6,13 @@ using UnityEngine;
 
 public class ScoreUtility : MonoBehaviour
 {
-    private ScoreData _scoreData;
+    private static ScoreData _scoreData;
 
     private void Awake()
     {
         var scoreJson = PlayerPrefs.GetString("scores", "{}");
         _scoreData = JsonUtility.FromJson<ScoreData>(scoreJson);
+        
     }
 
     private void OnDestroy()
@@ -24,7 +25,7 @@ public class ScoreUtility : MonoBehaviour
         return _scoreData.scores.OrderBy(x => x.score);
     }
 
-    public void AddScore(Score score)
+    public static void AddScore(Score score)
     {
         _scoreData.scores.Add(score);
     }

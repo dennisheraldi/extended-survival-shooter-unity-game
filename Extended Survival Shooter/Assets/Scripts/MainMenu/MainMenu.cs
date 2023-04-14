@@ -8,12 +8,17 @@ public class MainMenu : MonoBehaviour
 
     public void Update()
     {
-        PlayerLabel.text = "Welcome back, " + MainManager.Instance.playerName + "!";
+        PlayerLabel.text = "Welcome back, " + PlayerDataLoader.playerName + "!";
     }
 
     public void NewGame()
     {
         SceneManager.LoadScene("OpeningScene");
+    }
+
+    public void GoToScoreboard()
+    {
+        SceneManager.LoadScene("Scoreboard");
     }
 
     public void QuitGame()
