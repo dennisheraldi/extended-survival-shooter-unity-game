@@ -29,7 +29,6 @@ public class PlayerHealth : MonoBehaviour
     ParticleSystem HealParticles;                // Reference to the particle system that plays when the enemy is damaged.
     GameObject gunObject;
     PlayerShooting gun;
-    PetBuffHealth petBuffHealth;
     
     
 
@@ -40,11 +39,10 @@ public class PlayerHealth : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerMovement>();
         playerShooting = GetComponentInChildren<PlayerShooting>();
-        HealParticles = GetComponentsInChildren<ParticleSystem>()[1];
+        HealParticles = GetComponentsInChildren<ParticleSystem>()[3];
 
         gunObject = GameObject.Find("GunBarrelEnd");
         gun = gunObject.GetComponent<PlayerShooting>();
-        
         
         // Set the initial health of the player.
         currentHealth = MainManager.Instance.currentPlayerHealth;
@@ -77,6 +75,28 @@ public class PlayerHealth : MonoBehaviour
         {
             Death();
         }
+    }
+
+    public void HealPlayer(int amount)
+    {
+        // Reduce the current health by the damage amount.
+        if (currentHealth + amount > 100)
+        {
+            currentHealth = 100;
+        }
+        else
+        {
+            currentHealth += amount;
+        }
+
+        MainManager.Instance.currentPlayerHealth = currentHealth;
+
+        // Set the health bar's value to the current health.
+        healthSlider.value = currentHealth;
+
+        // Set the health text 
+        healthText.text = currentHealth.ToString() + "/100";
+        HealParticles.Play();
     }
 
 
