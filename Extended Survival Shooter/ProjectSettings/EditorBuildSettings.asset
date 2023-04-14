@@ -23,9 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Quest4.unity
     guid: befcf4ddf5607194181ea9483bed00d4
-  - enabled: 1
-    path: Assets/Scenes/LoadGame.unity
-    guid: f82b3bae7c7dbcd4fabb51a21c0970d5
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/MainMenuScene.unity
     guid: d31061f241d73ef4fb5619e0e6b9e533

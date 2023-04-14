@@ -35,13 +35,19 @@ public class EnemyAttack : MonoBehaviour
         {
             playerInRange = true;
         }
-        if (other.gameObject == pet && other.isTrigger == false)
+        if (GameObject.FindGameObjectWithTag("Buff") != null)
         {
-            petInRange = true;
+            if (other.gameObject == pet && other.isTrigger == false)
+            {
+                petInRange = true;
+            }
         }
-        if (other.gameObject == healer && other.isTrigger == false)
+        if (GameObject.FindGameObjectWithTag("Healer") != null)
         {
-            healerInRange = true;
+            if (other.gameObject == healer && other.isTrigger == false)
+            {
+                healerInRange = true;
+            }
         }
     }
 
@@ -51,7 +57,7 @@ public class EnemyAttack : MonoBehaviour
         {
             playerInRange = false;
         }
-        if (GameObject.FindGameObjectWithTag("Pet") != null)
+        if (GameObject.FindGameObjectWithTag("Buff") != null)
         {
             if (other.gameObject == pet)
             {
@@ -76,7 +82,7 @@ public class EnemyAttack : MonoBehaviour
         {
             AttackPlayer ();
         }
-        if (GameObject.FindGameObjectWithTag("Pet") != null)
+        if (GameObject.FindGameObjectWithTag("Buff") != null)
         {
             if (timer >= timeBetweenAttacks && petInRange/* && enemyHealth.currentHealth > 0*/)
             {
@@ -111,7 +117,7 @@ public class EnemyAttack : MonoBehaviour
     void AttackPet ()
     {
         timer = 0f;
-        petHealth = GameObject.FindGameObjectWithTag("Pet").GetComponent<PetBuffHealth>();
+        petHealth = GameObject.FindGameObjectWithTag("Buff").GetComponent<PetBuffHealth>();
         if (petHealth.currentHealth > 0)
         {
             petHealth.TakeDamage (attackDamage);

@@ -87,11 +87,15 @@ public class PlayerShooting : MonoBehaviour
                 }
                 else
                 {
-                    if (GameObject.FindGameObjectWithTag("Pet") != null)
+                    Debug.Log("Halo");
+                    if (GameObject.FindGameObjectWithTag("Buff") != null)
                     {
+                        Debug.Log("Buffed");
+                        pet = GameObject.FindGameObjectWithTag("Buff");
                         petBuffAction = pet.GetComponent<PetBuffAction>();
                         if (petBuffAction.buffed == true)
                         {
+                            Debug.Log("Buffed");
                             int damageBuff = petBuffAction.buffDamage;
                             enemyHealth.TakeDamage(damageBuff, shootHit.point);
                         }
