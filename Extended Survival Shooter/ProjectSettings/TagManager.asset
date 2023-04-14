@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - HealthText
+  - Enemy
   - Pet
   layers:
   - Default

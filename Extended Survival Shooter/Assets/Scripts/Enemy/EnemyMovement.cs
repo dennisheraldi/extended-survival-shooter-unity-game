@@ -17,7 +17,7 @@ public class EnemyMovement : MonoBehaviour
             pet = GameObject.FindGameObjectWithTag("Pet").transform;
 
             playerHealth = player.GetComponent<PlayerHealth>();
-            PetBuffHealth = pet.GetComponent<PetBuffHealth>();
+            // PetBuffHealth = pet.GetComponent<PetBuffHealth>();
 
             enemyHealth = GetComponent<EnemyHealth>();
             nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -32,8 +32,8 @@ public class EnemyMovement : MonoBehaviour
 
             if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
             {
-                if (PetBuffHealth.currentHealth > 0)
-                {
+                // if (PetBuffHealth.currentHealth > 0)
+                // {
                     float distanceToPet = Vector3.Distance(transform.position, pet.position);
                     if (distanceToPlayer < distanceToPet)
                     {
@@ -45,11 +45,11 @@ public class EnemyMovement : MonoBehaviour
                         // ... set the destination of the nav mesh agent to the pet.
                         nav.SetDestination(pet.position);
                     }
-                }
-                else
-                {
-                    nav.SetDestination(player.position);
-                }
+                // }
+                // else
+                // {
+                //     nav.SetDestination(player.position);
+                // }
                 // ... set the destination of the nav mesh agent to the player.
             }
             // Otherwise...
