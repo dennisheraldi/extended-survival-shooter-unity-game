@@ -12,6 +12,7 @@ public class WeaponSwitch : MonoBehaviour
     float time;
     bool playerDead = false;
     public Slider chargeSlider;
+    Bow bow;
 
     void Start()
     {
@@ -19,40 +20,43 @@ public class WeaponSwitch : MonoBehaviour
         Select(selectedWeapon);
 
         time = 0f;
+        bow = weapons[2].gameObject.GetComponent<Bow>();
     }
 
     void Update()
     {
         time += Time.deltaTime;
-
+        
         int prevSelected = selectedWeapon;
 
-        for (int i = 0; i < keys.Length; i++) {
-            if (Input.GetKeyDown(keys[i]) && time >= switchTime) {
-                selectedWeapon = i;
+        if (prevSelected != 2 || (prevSelected == 2 && bow.switchWeaponAble)) {
+            for (int i = 0; i < keys.Length; i++) {
+                if (Input.GetKeyDown(keys[i]) && time >= switchTime) {
+                    selectedWeapon = i;
+                }
             }
-        }
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f) {
-            if (selectedWeapon >= weapons.Length - 1) {
-                selectedWeapon = 0;
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f) {
+                if (selectedWeapon >= weapons.Length - 1) {
+                    selectedWeapon = 0;
+                }
+                else {
+                    selectedWeapon++;
+                }
             }
-            else {
-                selectedWeapon++;
-            }
-        }
 
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
-            if (selectedWeapon <= 0) {
-                selectedWeapon = weapons.Length - 1;
+            if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
+                if (selectedWeapon <= 0) {
+                    selectedWeapon = weapons.Length - 1;
+                }
+                else {
+                    selectedWeapon--;
+                }
             }
-            else {
-                selectedWeapon--;
-            }
-        }
 
-        if (prevSelected != selectedWeapon) {
-            Select(selectedWeapon);
+            if (prevSelected != selectedWeapon) {
+                Select(selectedWeapon);
+            }
         }
     }
 
@@ -70,15 +74,16 @@ public class WeaponSwitch : MonoBehaviour
     }
 
     void Select(int weaponIndex) {
+        Bow bow = weapons[2].gameObject.GetComponent<Bow>();
+
         // bow UI
         if (weaponIndex == 2) {
             chargeSlider.gameObject.SetActive(true);
         } else {
             chargeSlider.gameObject.SetActive(false);
         }
-        
+
         // clean gunline
-        Bow bow = weapons[2].gameObject.GetComponent<Bow>();
         bow.CleanGunLine();
 
         for (int i = 0; i < weapons.Length; i++) {

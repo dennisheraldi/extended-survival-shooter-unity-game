@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class Bow : MonoBehaviour
 {
     public int damagePerShot = 20;              
-    public float timeBetweenBullets = 0.15f;       
+    public float timeBetweenBullets = 3f;       
 
-    float timer;                                                         
+    float timer, timerPower;                                                         
     ParticleSystem gunParticles;  
     LineRenderer gunLine;                                
     AudioSource gunAudio;                                                     
@@ -23,6 +23,8 @@ public class Bow : MonoBehaviour
     float power = 0f;
     float time, v0;
     bool shot = false;
+    bool validClick = false;
+    public bool switchWeaponAble = true;
 
     // scene manager
     // public PauseManager pauseManager;
@@ -40,26 +42,35 @@ public class Bow : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+        timerPower += Time.deltaTime;
         chargeSlider.value = power;
         power = 0f;
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            shot = false;
-            timer = 0f;
+        if (timer >= time) {
+            switchWeaponAble = true;
         }
 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButtonDown("Fire1") && timer >= timeBetweenBullets)
         {
-            power = timer <= 2.5f ? timer * 4f : 10f;
+            shot = false;
+            timerPower = 0f;
+            validClick = true;
+        }
+
+        if (Input.GetButton("Fire1") && validClick)
+        {
+            power = timerPower <= 2.5f ? timerPower * 4f : 10f;
             DrawPath(out time, out v0, power, angle, stepCount);
         }
 
-        if (Input.GetButtonUp("Fire1")) {
+        if (Input.GetButtonUp("Fire1") && validClick) {
             // StopAllCoroutines();
             CleanGunLine();
             StartCoroutine(Coroutine_Movement(time, v0, power));
+            timer = 0f;
+            validClick = false;
             shot = true;
+            switchWeaponAble = false;
         }
 
         if (shot && timer >= timeBetweenBullets * effectsDisplayTime)
@@ -108,8 +119,6 @@ public class Bow : MonoBehaviour
 
     IEnumerator Coroutine_Movement(float time, float v0, float power) {
         // bow and arrow
-        timer = 0f;
-
         gunAudio.Play();
 
         gunParticles.Stop();
