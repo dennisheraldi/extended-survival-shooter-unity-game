@@ -29,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
     ParticleSystem HealParticles;                // Reference to the particle system that plays when the enemy is damaged.
     GameObject gunObject;
     PlayerShooting gun;
+    PetBuffHealth petBuffHealth;
     
     
 
@@ -102,12 +103,6 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-
-    public void BuffDamage (int amount)
-    {
-        HealParticles.Play();
-        gun.damagePerShot = amount;
-    }
 
 
     void Death()
