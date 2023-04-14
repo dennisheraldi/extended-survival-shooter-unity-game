@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
     Animator anim;                                              // Reference to the Animator component.
     AudioSource playerAudio;                                    // Reference to the AudioSource component.
     PlayerMovement playerMovement;                              // Reference to the player's movement.
-    PlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
+    WeaponSwitch weaponSwitch;                                  // Reference to the WeaponSwitch script.
     public static bool isDead;                                                // Whether the player is dead.
     bool damaged;                                               // True when the player gets damaged.
     
@@ -38,11 +38,10 @@ public class PlayerHealth : MonoBehaviour
         anim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerMovement>();
-        playerShooting = GetComponentInChildren<PlayerShooting>();
+        weaponSwitch = GetComponentInChildren<WeaponSwitch>();
         HealParticles = GetComponentsInChildren<ParticleSystem>()[3];
 
         gunObject = GameObject.Find("GunBarrelEnd");
-        gun = gunObject.GetComponent<PlayerShooting>();
         
         // Set the initial health of the player.
         currentHealth = MainManager.Instance.currentPlayerHealth;
@@ -137,7 +136,7 @@ public class PlayerHealth : MonoBehaviour
         deathTime = Time.time;
 
         // Turn off any remaining shooting effects.
-        playerShooting.DisableEffects();
+        weaponSwitch.Disable();
 
         // Tell the animator that the player is dead.
         anim.SetTrigger("Die");
@@ -148,7 +147,7 @@ public class PlayerHealth : MonoBehaviour
 
         // Turn off the movement and shooting scripts.
         playerMovement.enabled = false;
-        playerShooting.enabled = false;
+        weaponSwitch.enabled = false;
     }
 
 
