@@ -94,14 +94,32 @@ public class NormalGun : MonoBehaviour
             if (enemyHealth != null)
             {
                 // cheat?
-                //if (MainManager.Instance.instantKill == true)
-                //{
-                //    enemyHealth.TakeDamage(1000, shootHit.point);
-                //}
-                //else
-                //{
-                enemyHealth.TakeDamage(damagePerShot, shootHit.point);
-                //}
+                if (MainManager.Instance.instantKill == true)
+                {
+                   enemyHealth.TakeDamage(1000, shootHit.point);
+                }
+                else
+                {
+                    if (GameObject.FindGameObjectWithTag("Buff") != null)
+                    {
+                        GameObject pet = GameObject.FindGameObjectWithTag("Buff");
+                        PetBuffAction buff = pet.GetComponent<PetBuffAction>();
+                        if (buff.buffed)
+                        {
+                                int damageBuff = buff.buffDamage;
+                                enemyHealth.TakeDamage(damageBuff, shootHit.point);
+                        }
+                        else
+                        {
+                            enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                        }
+                    }
+                    else
+                    {
+                        enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                    }
+                
+                }
             }
 
             gunLine.SetPosition(1, shootHit.point);

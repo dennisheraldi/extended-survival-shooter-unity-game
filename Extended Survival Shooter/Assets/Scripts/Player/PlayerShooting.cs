@@ -20,16 +20,15 @@ public class PlayerShooting : MonoBehaviour
     PetBuffAction petBuffAction;
     ParticleSystem BuffParticles;
     GameObject pet;
+    PetBuffHealth petBuffHealth;
 
     void Awake()
     {
-        pet = GameObject.FindGameObjectWithTag("Pet");
         shootableMask = LayerMask.GetMask("Shootable");
         gunParticles = GetComponent<ParticleSystem>();
         gunLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
         gunLight = GetComponent<Light>();
-        petBuffAction = pet.GetComponent<PetBuffAction>();
     }
 
     void Update()
@@ -88,10 +87,23 @@ public class PlayerShooting : MonoBehaviour
                 }
                 else
                 {
-                    if (petBuffAction.buffed == true)
+                    Debug.Log("Halo");
+                    if (GameObject.FindGameObjectWithTag("Buff") != null)
                     {
-                        int damageBuff = petBuffAction.buffDamage;
-                        enemyHealth.TakeDamage(damageBuff, shootHit.point);
+                        Debug.Log("Buffed");
+                        pet = GameObject.FindGameObjectWithTag("Buff");
+                        petBuffAction = pet.GetComponent<PetBuffAction>();
+                        if (petBuffAction.buffed == true)
+                        {
+                            Debug.Log("Buffed");
+                            int damageBuff = petBuffAction.buffDamage;
+                            enemyHealth.TakeDamage(damageBuff, shootHit.point);
+                        }
+                        else
+                        {
+                            enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                        }
+
                     }
                     else
                     {

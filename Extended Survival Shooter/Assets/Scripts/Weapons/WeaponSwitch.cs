@@ -10,7 +10,6 @@ public class WeaponSwitch : MonoBehaviour
     float switchTime = 1f;
     int selectedWeapon = 0;
     float time;
-    bool playerDead = false;
     public Slider chargeSlider;
     Bow bow;
 
@@ -95,7 +94,6 @@ public class WeaponSwitch : MonoBehaviour
     }
 
     public void Disable() {
-        playerDead = true;
         for (int i = 0; i < weapons.Length; i++) {
             weapons[i].gameObject.SetActive(false);
         }

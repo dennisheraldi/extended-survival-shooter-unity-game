@@ -9,41 +9,33 @@ public class SettingsMenu : MonoBehaviour
     // private float _volume;
     public Text NamePlaceholder;
     public Text InputtedName;
+    public Slider VolumeSlider;
 
     // Start is called before the first frame update
     void Start()
     {
-        // _volume = AudioListener.volume;
-        // if (_name != "")
-        // {
-        //     nameField.text = _name;
-        // }
-        MainManager.Instance.LoadSettingsPreferences();
-        NamePlaceholder.text = MainManager.Instance.playerName;
-        InputtedName.text = MainManager.Instance.playerName;
+        NamePlaceholder.text = PlayerDataLoader.playerName;
+        InputtedName.text = PlayerDataLoader.playerName;
+        VolumeSlider.value = PlayerDataLoader.gameVolume;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // AudioListener.volume = _volume;
-        // if (_name != "")
-        // {
-        //     nameField.text = _name;
-        // }
+       
     }
 
-    public void UpdateName(string username)
+    public void UpdateName(string name)
     {
-        // _name = username;
-        MainManager.Instance.playerName = username;
-        MainManager.Instance.SaveSettingsPreferences();
+        PlayerDataLoader.playerName = name;
+        PlayerPrefs.SetString("PlayerName", PlayerDataLoader.playerName);
     }
 
     public void UpdateVolume(float volume)
     {
         AudioListener.volume = volume;
-        MainManager.Instance.gameVolume = volume;
-        MainManager.Instance.SaveSettingsPreferences();
+        PlayerDataLoader.gameVolume = volume;
+        VolumeSlider.value = PlayerDataLoader.gameVolume;
+        PlayerPrefs.SetFloat("GameVolume", PlayerDataLoader.gameVolume);
     }
 }

@@ -24,9 +24,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Quest4.unity
     guid: befcf4ddf5607194181ea9483bed00d4
   - enabled: 1
-    path: Assets/Scenes/LoadGame.unity
-    guid: f82b3bae7c7dbcd4fabb51a21c0970d5
+    path: Assets/Scenes/EndingScene.unity
+    guid: 83ab648fc2cbc0c40ae9f0bf77f992b7
   - enabled: 1
     path: Assets/Scenes/MainMenuScene.unity
     guid: d31061f241d73ef4fb5619e0e6b9e533
+  - enabled: 1
+    path: Assets/Scenes/Scoreboard.unity
+    guid: b60d642e886c53f40b9bf9dbeb2c9a5a
   m_configObjects: {}

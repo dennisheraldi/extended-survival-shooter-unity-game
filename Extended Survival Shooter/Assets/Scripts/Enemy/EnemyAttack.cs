@@ -10,11 +10,14 @@ public class EnemyAttack : MonoBehaviour
     Animator anim;
     GameObject player;
     GameObject pet;
+    GameObject healer;
     PlayerHealth playerHealth;
     PetBuffHealth petHealth;
+    PetHealerHealth healerHealth;
     //EnemyHealth enemyHealth;
     bool playerInRange;
     bool petInRange;
+    bool healerInRange;
     float timer;
 
 
@@ -22,10 +25,9 @@ public class EnemyAttack : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag ("Player");
         playerHealth = player.GetComponent <PlayerHealth> ();
-        pet = GameObject.FindGameObjectWithTag ("Pet");
-        petHealth = pet.GetComponent <PetBuffHealth> ();
         // enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent <Animator> ();
+        timer = 0f;
     }
 
     void OnTriggerEnter (Collider other)
@@ -34,9 +36,21 @@ public class EnemyAttack : MonoBehaviour
         {
             playerInRange = true;
         }
-        if (other.gameObject == pet && other.isTrigger == false)
+        if (GameObject.FindGameObjectWithTag("Buff") != null)
         {
-            petInRange = true;
+            pet = GameObject.FindGameObjectWithTag("Buff");
+            if (other.gameObject == pet && other.isTrigger == false)
+            {
+                petInRange = true;
+            }
+        }
+        if (GameObject.FindGameObjectWithTag("Healer") != null)
+        {
+            healer = GameObject.FindGameObjectWithTag("Healer");
+            if (other.gameObject == healer && other.isTrigger == false)
+            {
+                healerInRange = true;
+            }
         }
     }
 
@@ -46,9 +60,21 @@ public class EnemyAttack : MonoBehaviour
         {
             playerInRange = false;
         }
-        if (other.gameObject == pet)
+        if (GameObject.FindGameObjectWithTag("Buff") != null)
         {
-            petInRange = false;
+            pet = GameObject.FindGameObjectWithTag("Buff");
+            if (other.gameObject == pet)
+            {
+                petInRange = false;
+            }
+        }
+        if (GameObject.FindGameObjectWithTag("Healer") != null)
+        {
+            healer = GameObject.FindGameObjectWithTag("Healer");
+            if (other.gameObject == healer)
+            {
+                healerInRange = false;
+            }
         }
     }
 
@@ -61,11 +87,21 @@ public class EnemyAttack : MonoBehaviour
         {
             AttackPlayer ();
         }
-        if (timer >= timeBetweenAttacks && petInRange/* && enemyHealth.currentHealth > 0*/)
+        if (GameObject.FindGameObjectWithTag("Buff") != null)
         {
-            AttackPet ();
+            if (timer >= timeBetweenAttacks && petInRange/* && enemyHealth.currentHealth > 0*/)
+            {
+                AttackPet ();
+            }
         }
+        if (GameObject.FindGameObjectWithTag("Healer") != null)
+        {
+            if (timer >= timeBetweenAttacks && healerInRange/* && enemyHealth.currentHealth > 0*/)
+            {
 
+                AttackHealer ();
+            }
+        }
         if (playerHealth.currentHealth <= 0)
         {
             anim.SetTrigger ("PlayerDead");
@@ -87,10 +123,22 @@ public class EnemyAttack : MonoBehaviour
     void AttackPet ()
     {
         timer = 0f;
-
+        petHealth = GameObject.FindGameObjectWithTag("Buff").GetComponent<PetBuffHealth>();
         if (petHealth.currentHealth > 0)
         {
             petHealth.TakeDamage (attackDamage);
+        }
+
+
+    }
+
+    void AttackHealer()
+    {
+        timer = 0f;
+        healerHealth = GameObject.FindGameObjectWithTag("Healer").GetComponent<PetHealerHealth>();
+        if (healerHealth.currentHealth > 0)
+        {
+            healerHealth.TakeDamage (attackDamage);
         }
     }
 }

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PetHealerAOC
+  m_Controller: {fileID: 9100000, guid: 79fb48e8746a18b49a6f5d2e86f6d52b, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 1827226128182048838, guid: 5c14c99557b54074eb3b65351a34447c, type: 3}
+    m_OverrideClip: {fileID: -6747520724535164884, guid: 8209e139fd5713c48932d7ff1b91cc3b, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 573b5d4513163574fb50a55b3614d580, type: 3}
+    m_OverrideClip: {fileID: 4671597344643332402, guid: 8209e139fd5713c48932d7ff1b91cc3b, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 15f98316f1864b54cb834b22d16a50bc, type: 3}
+    m_OverrideClip: {fileID: -5957775987001231252, guid: 8209e139fd5713c48932d7ff1b91cc3b, type: 3}

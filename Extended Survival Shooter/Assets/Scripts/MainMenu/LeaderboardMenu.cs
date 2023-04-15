@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LeaderboardMenu : MonoBehaviour
 {
     public ScoreEntry scoreEntry;
     public ScoreUtility scoreUtility;
 
-    private const int LeaderboardLimit = 8;
+    private const int LeaderboardLimit = 99;
     private int _leaderboardSize;
 
     // Start is called before the first frame update
@@ -22,7 +23,12 @@ public class LeaderboardMenu : MonoBehaviour
             var entry = Instantiate(scoreEntry, transform).GetComponent<ScoreEntry>();
             entry.rank.text = (i + 1).ToString();
             entry.username.text = scores[i].username;
-            entry.score.text = scores[i].score.ToString();
+            entry.score.text = TimeSpan.FromSeconds((int)scores[i].score).ToString("c");
         }
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenuScene");
     }
 }
