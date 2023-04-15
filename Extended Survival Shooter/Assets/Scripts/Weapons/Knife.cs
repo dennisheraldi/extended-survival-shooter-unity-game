@@ -13,6 +13,7 @@ public class Knife : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        knife = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame

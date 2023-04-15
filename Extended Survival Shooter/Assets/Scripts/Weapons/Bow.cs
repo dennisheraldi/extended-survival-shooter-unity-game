@@ -118,7 +118,7 @@ public class Bow : MonoBehaviour
     }
 
     public void CleanGunLine() {
-        gunLine.positionCount = 0;
+        if (gunLine) gunLine.positionCount = 0;
     }
 
     IEnumerator Coroutine_Movement(float time, float v0, float power) {
@@ -137,7 +137,7 @@ public class Bow : MonoBehaviour
 
         float t = 0f;
         float vx, vy, x, y;
-        while (t < time) {
+        while (t < time && arrowRigidbody) {
             x = v0 * t * Mathf.Cos(angle);
             y = v0 * t * Mathf.Sin(angle) - 0.5f * -Physics.gravity.y * t * t;
             vx = v0 * Mathf.Cos(angle);
