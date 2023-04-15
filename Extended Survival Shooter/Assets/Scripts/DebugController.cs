@@ -10,16 +10,22 @@ public class DebugController : MonoBehaviour
 
     string input;
 
+    private bool displayAlert = false;
+    private float alertStartTime;
+
     public static DebugCommand ROSE_GOLD;
     public static DebugCommand IMMUNE;
     public static DebugCommand KILLER;
     public static DebugCommand HELP;
+    public static DebugCommand KILLPET;
+    public static DebugCommand USAIN_BOLT;
 
     public List<object> commandList;
 
     public void OnToggleDebug(InputValue value)
     {
         showConsole = !showConsole;
+        input = "";
     }
 
     public void OnReturn(InputValue value)
@@ -34,7 +40,7 @@ public class DebugController : MonoBehaviour
     private void Awake()
     {
         ROSE_GOLD = new DebugCommand("rose_gold", "Gives you 1000 gold", "rose_gold", () => {
-            MainManager.Instance.currentMoney += 1000;
+            MainManager.Instance.currentMoney = 999999999;
         });
         IMMUNE = new DebugCommand("immune", "Makes you immune to damage", "immune", () => {
             MainManager.Instance.immunity = true;
@@ -45,12 +51,22 @@ public class DebugController : MonoBehaviour
         HELP = new DebugCommand("help", "Shows all available commands", "help", () => {
             showHelp = true;
         });
+        KILLPET = new DebugCommand("kill_pet", "Kills your pet", "kill_pet", () => {
+            MainManager.Instance.currentPetHealth = 0;
+        });
+        USAIN_BOLT = new DebugCommand("usain_bolt", "Makes you run faster", "usain_bolt", () => {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+            playerMovement.speed = 12;
+        });
 
         commandList = new List<object>{
             ROSE_GOLD,
             IMMUNE,
             KILLER,
-            HELP
+            HELP,
+            KILLPET,
+            USAIN_BOLT
         };
     }
 
@@ -90,7 +106,22 @@ public class DebugController : MonoBehaviour
 
         GUI.Box(new Rect(0, y, Screen.width, 30), "");
         GUI.backgroundColor = new Color(0, 0, 0, 0);
+        GUI.SetNextControlName("DebugInput");
         input = GUI.TextField(new Rect(10f, y + 5f, Screen.width - 20f, 20f), input);
+        GUI.FocusControl("DebugInput");
+
+        if (displayAlert)
+        {
+            float timeElapsed = Time.time - alertStartTime;
+            if (timeElapsed < 2f)
+            {
+                GUI.Label(new Rect(10f, y + 30f, Screen.width - 20f, 20f), "Cheat activated");
+            }
+            else
+            {
+                displayAlert = false;
+            }
+        }
 
         
     }
@@ -104,6 +135,11 @@ public class DebugController : MonoBehaviour
                 if (commandList[i] as DebugCommand != null)
                 {
                     (commandList[i] as DebugCommand).Invoke();
+                    if (commandBase.CommandId != "help")
+                    {
+                        displayAlert = true;
+                        alertStartTime = Time.time;
+                    }
                 }
             }
         }
