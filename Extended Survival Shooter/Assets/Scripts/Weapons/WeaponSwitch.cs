@@ -24,7 +24,7 @@ public class WeaponSwitch : MonoBehaviour
             "Sword",
             "Bow"
         };
-        ownedWeapons = new List<string>() {"NormalGun", "Shotgun"};
+        ownedWeapons = new List<string>() {"NormalGun"};
         SetWeapons();
         Select(selectedWeapon);
 
