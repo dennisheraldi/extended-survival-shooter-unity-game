@@ -2037,6 +2037,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1871197980, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: damage
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593062458578131800, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: damagePerShot
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593062458578131800, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: timeBetweenBullets
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 4593062459211755684, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
       propertyPath: chargeSlider
       value: 

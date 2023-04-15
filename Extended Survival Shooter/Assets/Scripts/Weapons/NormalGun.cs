@@ -19,6 +19,7 @@ public class NormalGun : MonoBehaviour
     float effectsDisplayTime = 0.2f;
 
     GameObject gunBarrel;
+    GameObject gun;
 
     // scene manager
     // public PauseManager pauseManager;
@@ -28,6 +29,7 @@ public class NormalGun : MonoBehaviour
         shootableMask = LayerMask.GetMask("Shootable");
 
         gunBarrel = GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject;
+        gun = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
         gunParticles = gunBarrel.GetComponent<ParticleSystem>();
         gunLine = gunBarrel.GetComponent<LineRenderer>();
         gunAudio = gunBarrel.GetComponent<AudioSource>();
@@ -128,5 +130,25 @@ public class NormalGun : MonoBehaviour
         {
             gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
         }
+        StopAllCoroutines();
+        StartCoroutine(Animate());
+    }
+
+    IEnumerator Animate() {
+        Vector3 position = gun.transform.localPosition;
+        Vector3 direction = gunBarrel.transform.forward;
+        float x = 0f;
+
+        while (x > -0.3f) {
+            gun.transform.localPosition = new Vector3(gun.transform.localPosition.x + x, gun.transform.localPosition.y, gun.transform.localPosition.z);
+            x -= 0.15f;
+            yield return new WaitForSeconds(0.02f);
+        }
+        while (x < 0f) {
+            gun.transform.localPosition = new Vector3(gun.transform.localPosition.x - x, gun.transform.localPosition.y, gun.transform.localPosition.z);
+            x += 0.15f;
+            yield return new WaitForSeconds(0.02f);
+        }
+        gun.transform.localPosition = new Vector3(0, 0, 0);
     }
 }

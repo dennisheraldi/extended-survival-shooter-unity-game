@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18319179, g: 0.22679496, b: 0.2945614, a: 1}
+  m_IndirectSpecularColor: {r: 0.18319169, g: 0.22679493, b: 0.29456112, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -617,7 +617,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &971414605
 Transform:
   m_ObjectHideFlags: 0
@@ -1111,6 +1111,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6972681977992280125, guid: 07359941ee957c64182120edb58b9184, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1459372703440148, guid: 07359941ee957c64182120edb58b9184, type: 3}
       propertyPath: m_Name
       value: HUDCanvas
@@ -1199,6 +1203,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3524366704970830310, guid: 07359941ee957c64182120edb58b9184, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524366704970830310, guid: 07359941ee957c64182120edb58b9184, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6509927556045364804, guid: 07359941ee957c64182120edb58b9184, type: 3}
       propertyPath: Shop
       value: 
@@ -1228,6 +1240,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1871197980, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: damage
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593062458578131800, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: damagePerShot
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593062458578131800, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: timeBetweenBullets
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 4593062459211755684, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
       propertyPath: chargeSlider
       value: 
