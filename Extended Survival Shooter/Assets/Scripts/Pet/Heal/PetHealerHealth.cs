@@ -54,11 +54,11 @@ public class PetHealerHealth : MonoBehaviour
         currentHealth -= amount;
 
         // Update the health slider
-        petHealthSlider.value = currentHealth;
-        // Update the health text
-        petHealthText.text = currentHealth.ToString() + "/100";
+        // petHealthSlider.value = currentHealth;
+        // // Update the health text
+        // petHealthText.text = currentHealth.ToString() + "/100";
 
-        MainManager.Instance.currentPetHealth = currentHealth;
+        // MainManager.Instance.currentPetHealth = currentHealth;
 
         // If the current health is less than or equal to zero...
         if (currentHealth <= 0)

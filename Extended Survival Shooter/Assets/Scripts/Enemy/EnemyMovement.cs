@@ -30,9 +30,9 @@ public class EnemyMovement : MonoBehaviour
 
             if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
             {
-                if (GameObject.FindGameObjectWithTag("Pet") != null)
+                if (GameObject.FindGameObjectWithTag("Buff") != null)
                 {
-                    pet = GameObject.FindGameObjectWithTag("Pet").transform;
+                    pet = GameObject.FindGameObjectWithTag("Buff").transform;
                     float distanceToPet = Vector3.Distance(transform.position, pet.position);
                     if (distanceToPlayer < distanceToPet)
                     {

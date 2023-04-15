@@ -27,6 +27,7 @@ public class EnemyAttack : MonoBehaviour
         playerHealth = player.GetComponent <PlayerHealth> ();
         // enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent <Animator> ();
+        timer = 0f;
     }
 
     void OnTriggerEnter (Collider other)
@@ -37,6 +38,7 @@ public class EnemyAttack : MonoBehaviour
         }
         if (GameObject.FindGameObjectWithTag("Buff") != null)
         {
+            pet = GameObject.FindGameObjectWithTag("Buff");
             if (other.gameObject == pet && other.isTrigger == false)
             {
                 petInRange = true;
@@ -44,6 +46,7 @@ public class EnemyAttack : MonoBehaviour
         }
         if (GameObject.FindGameObjectWithTag("Healer") != null)
         {
+            healer = GameObject.FindGameObjectWithTag("Healer");
             if (other.gameObject == healer && other.isTrigger == false)
             {
                 healerInRange = true;
@@ -59,6 +62,7 @@ public class EnemyAttack : MonoBehaviour
         }
         if (GameObject.FindGameObjectWithTag("Buff") != null)
         {
+            pet = GameObject.FindGameObjectWithTag("Buff");
             if (other.gameObject == pet)
             {
                 petInRange = false;
@@ -66,6 +70,7 @@ public class EnemyAttack : MonoBehaviour
         }
         if (GameObject.FindGameObjectWithTag("Healer") != null)
         {
+            healer = GameObject.FindGameObjectWithTag("Healer");
             if (other.gameObject == healer)
             {
                 healerInRange = false;
@@ -93,6 +98,7 @@ public class EnemyAttack : MonoBehaviour
         {
             if (timer >= timeBetweenAttacks && healerInRange/* && enemyHealth.currentHealth > 0*/)
             {
+
                 AttackHealer ();
             }
         }
