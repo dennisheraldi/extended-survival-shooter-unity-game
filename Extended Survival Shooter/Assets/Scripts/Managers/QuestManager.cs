@@ -229,6 +229,7 @@ public class QuestManager : MonoBehaviour
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.nextScene = "EndingScene";
             ScoreUtility.AddScore(new Score(PlayerPrefs.GetString("PlayerName"), MainManager.Instance.currentPlayDuration));
+            Destroy(MainManager.Instance.gameObject);
             SceneManager.LoadScene("EndingScene");
         }
     }
