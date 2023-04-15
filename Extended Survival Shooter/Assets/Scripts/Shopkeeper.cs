@@ -164,6 +164,18 @@ public class Shopkeeper : MonoBehaviour
         if (MainManager.Instance.currentPet == ""){
             PetHealthUI.SetActive(false);
         }
+
+        // If player already purchase the gun, deactivate the gun button
+        if (MainManager.Instance.ownedWeapons.Contains("Shotgun"))
+        {
+            ShotgunBuyButton.interactable = false;
+        } else if (MainManager.Instance.ownedWeapons.Contains("Sword"))
+        {
+            SwordBuyButton.interactable = false;
+        } else if (MainManager.Instance.ownedWeapons.Contains("Bow"))
+        {
+            BowBuyButton.interactable = false;
+        }
     }
 
     public void PurchasePet(string petName)

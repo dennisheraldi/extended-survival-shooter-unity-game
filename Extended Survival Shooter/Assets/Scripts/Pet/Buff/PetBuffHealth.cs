@@ -27,7 +27,9 @@ public class PetBuffHealth : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
 
         // Setting the current health when the enemy first spawns.
-        currentHealth = startingHealth;
+        currentHealth = MainManager.Instance.currentPetHealth;
+        petHealthSlider.value = currentHealth;
+        petHealthText.text = currentHealth.ToString() + "/100";
     }
 
 

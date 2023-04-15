@@ -2186,6 +2186,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 373891001, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
+      propertyPath: petHealthText
+      value: 
+      objectReference: {fileID: 4387082747080195966}
+    - target: {fileID: 373891001, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
       propertyPath: petHealthSlider
       value: 
       objectReference: {fileID: 4387082747080195967}
@@ -3271,7 +3275,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 07359941ee957c64182120edb58b9184, type: 3}
 --- !u!114 &4387082747080195966 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6907803052928154251, guid: 07359941ee957c64182120edb58b9184, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4526513253391051864, guid: 07359941ee957c64182120edb58b9184, type: 3}
   m_PrefabInstance: {fileID: 4387082747080195965}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -3282,7 +3286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &4387082747080195967 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6907803054258774657, guid: 07359941ee957c64182120edb58b9184, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4526513252597724242, guid: 07359941ee957c64182120edb58b9184, type: 3}
   m_PrefabInstance: {fileID: 4387082747080195965}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

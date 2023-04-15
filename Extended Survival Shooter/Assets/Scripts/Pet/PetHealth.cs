@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PetHealth : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PetHealth : MonoBehaviour
     public int currentHealth;
     public AudioClip deathClip;
     public Slider petHealthSlider;
+    public TextMeshProUGUI petHealthText;
 
     Animator anim;
     // AudioSource playerAudio;
@@ -24,7 +26,9 @@ public class PetHealth : MonoBehaviour
         petMovement = GetComponent<PetMovement>();
         petAttack = GetComponentInChildren<PetAttack>();
 
-        currentHealth = startingHealth;
+        currentHealth = MainManager.Instance.currentPetHealth;
+        petHealthSlider.value = currentHealth;
+        petHealthText.text = currentHealth.ToString() + "/100";
     }
 
 
@@ -48,9 +52,15 @@ public class PetHealth : MonoBehaviour
     public void TakeDamage(int amount)
     {
 
+        // Reduce the current health by the amount of damage sustained.
         currentHealth -= amount;
 
+        //Update the health slider
         petHealthSlider.value = currentHealth;
+        // Update the health text
+        petHealthText.text = currentHealth.ToString() + "/100";
+
+        MainManager.Instance.currentPetHealth = currentHealth;
 
         // petAudio.Play();
 
@@ -78,5 +88,8 @@ public class PetHealth : MonoBehaviour
 
         petMovement.enabled = false;
         petAttack.enabled = false;
+
+        //After 2 seconds destory the enemy.
+        Destroy(gameObject, 2f);
     }
 }

@@ -15155,3 +15155,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &8757326543064374610 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9134787482782307463, guid: 68169f254f8a14433afdb4913e0157be, type: 3}
+  m_PrefabInstance: {fileID: 526092979142592981}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1871197980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8757326543064374610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6bb2fa5401b354c9d2ff3204aff7f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 40
+  knife: {fileID: 8757326543064374610}
