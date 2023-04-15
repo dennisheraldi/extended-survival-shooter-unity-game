@@ -63,6 +63,9 @@ public class PetHealth : MonoBehaviour
 
     void Death()
     {
+        // Set pet in instance to ""
+        MainManager.Instance.currentPet = "";
+        
         isDead = true;
 
         // petAttack.DisableEffects();

@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PetHealerHealth : MonoBehaviour
 {
     public int startingHealth = 100;            // The amount of health the enemy starts the game with.
     public int currentHealth;                   // The current health the enemy has.
     public float sinkSpeed = 2.5f;              // The speed at which the enemy sinks through the floor when dead.            // The sound to play when the enemy dies.
+
+    public Slider petHealthSlider;
+    public TextMeshProUGUI petHealthText; 
 
 
     Animator anim;                              // Reference to the animator.
@@ -48,6 +53,13 @@ public class PetHealerHealth : MonoBehaviour
         // Reduce the current health by the amount of damage sustained.
         currentHealth -= amount;
 
+        // Update the health slider
+        petHealthSlider.value = currentHealth;
+        // Update the health text
+        petHealthText.text = currentHealth.ToString() + "/100";
+
+        MainManager.Instance.currentPetHealth = currentHealth;
+
         // If the current health is less than or equal to zero...
         if (currentHealth <= 0)
         {
@@ -59,7 +71,9 @@ public class PetHealerHealth : MonoBehaviour
 
     void Death()
     {
-        
+        // Set pet in instance to ""
+        MainManager.Instance.currentPet = "";
+
         // The enemy is dead.
         isDead = true;
 

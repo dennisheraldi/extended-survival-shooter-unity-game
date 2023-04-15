@@ -21,10 +21,16 @@ public class MainManager : MonoBehaviour
     public bool instantKill;
     public string playerName;
 
+    public string currentPet;
+
+    public int currentPetHealth;
+
     private void Awake()
     {
+        currentPet = "";
+        currentPetHealth = 100;
         currentPlayerHealth = 100;
-        currentMoney = 0;
+        currentMoney = 1000;
         currentQuest = 1;
         currentPlayDuration = 0;
         immunity = false;

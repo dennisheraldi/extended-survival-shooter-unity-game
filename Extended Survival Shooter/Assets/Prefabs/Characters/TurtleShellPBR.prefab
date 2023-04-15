@@ -1033,6 +1033,8 @@ MonoBehaviour:
   startingHealth: 100
   currentHealth: 0
   sinkSpeed: 2.5
+  petHealthSlider: {fileID: 0}
+  petHealthText: {fileID: 0}
 --- !u!114 &2911856214625758922
 MonoBehaviour:
   m_ObjectHideFlags: 0
