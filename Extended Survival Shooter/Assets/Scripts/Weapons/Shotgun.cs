@@ -114,8 +114,28 @@ public class Shotgun : MonoBehaviour
 
                 if (enemyHealth != null)
                 {
-                    int damage = (int)(damagePerShot/((shootHit.point - shootRay.origin).magnitude * (shootHit.point - shootRay.origin).magnitude));
-                    enemyHealth.TakeDamage(damage, shootHit.point);
+                    if (GameObject.FindGameObjectWithTag("Buff") != null)
+                    {
+                        GameObject pet = GameObject.FindGameObjectWithTag("Buff");
+                        PetBuffAction buff = pet.GetComponent<PetBuffAction>();
+                        if (buff.buffed)
+                        {
+                                int damageBuff = buff.buffDamage;
+                                int damage = (int)(damageBuff/((shootHit.point - shootRay.origin).magnitude * (shootHit.point - shootRay.origin).magnitude));
+                                enemyHealth.TakeDamage(damage, shootHit.point);
+                        }
+                        else
+                        {
+                            int damage = (int)(damagePerShot/((shootHit.point - shootRay.origin).magnitude * (shootHit.point - shootRay.origin).magnitude));
+                            enemyHealth.TakeDamage(damage, shootHit.point);
+                        }
+                    }
+                    else
+                    {
+                        int damage = (int)(damagePerShot/((shootHit.point - shootRay.origin).magnitude * (shootHit.point - shootRay.origin).magnitude));
+                        enemyHealth.TakeDamage(damage, shootHit.point);
+                    }
+
                 }
 
                 gunLines[i].SetPosition(1, shootHit.point);

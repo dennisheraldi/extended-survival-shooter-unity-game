@@ -100,7 +100,25 @@ public class NormalGun : MonoBehaviour
                 //}
                 //else
                 //{
-                enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                if (GameObject.FindGameObjectWithTag("Buff") != null)
+                {
+                    GameObject pet = GameObject.FindGameObjectWithTag("Buff");
+                    PetBuffAction buff = pet.GetComponent<PetBuffAction>();
+                    if (buff.buffed)
+                    {
+                            int damageBuff = buff.buffDamage;
+                            enemyHealth.TakeDamage(damageBuff, shootHit.point);
+                    }
+                    else
+                    {
+                        enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                    }
+                }
+                else
+                {
+                    enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                }
+                
                 //}
             }
 
