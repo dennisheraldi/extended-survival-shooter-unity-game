@@ -10,31 +10,31 @@ Unity versi 2021.3.21f1 LTS
 
 ## Screenshot aplikasi
 
-#Story
+# Story
 ![ss](/Screenshot/Story.png)
 
-#Save Game
+# Save Game
 ![ss](/Screenshot/Save.png)
 
-#Game Over
+# Game Over
 ![ss](/Screenshot/Game Over.png)
 
-#Local Scoreboard
+# Local Scoreboard
 ![ss](/Screenshot/ScoreBoard.png)
 
-#Main Menu
+# Main Menu
 ![ss](/Screenshot/Menu.png)
 
-#Shopkeeper
+# Shopkeeper
 ![ss](/Screenshot/Shop.png)
 
-#Weapon
+# Weapon
 ![ss](/Screenshot/Weapon.png)
 
-#Pet
+# Pet
 ![ss](/Screenshot/Pet.png)
 
-#Cheat
+# Cheat
 ![ss](/Screenshot/Cheat.png)
 
 ## Pembagian Kerja Anggota Kelompok Beserta Jam Persiapan dan Pengerjaan
