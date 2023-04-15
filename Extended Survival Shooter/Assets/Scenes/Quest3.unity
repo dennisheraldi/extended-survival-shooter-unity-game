@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18319179, g: 0.22679496, b: 0.2945614, a: 1}
+  m_IndirectSpecularColor: {r: 0.18319169, g: 0.22679493, b: 0.29456112, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3295,6 +3295,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4387082747080195968 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3524366703912980014, guid: 07359941ee957c64182120edb58b9184, type: 3}
+  m_PrefabInstance: {fileID: 4387082747080195965}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7076466232351607275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3302,6 +3313,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4593062459211755684, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: chargeSlider
+      value: 
+      objectReference: {fileID: 4387082747080195968}
+    - target: {fileID: 4593062460117496866, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
+      propertyPath: chargeSlider
+      value: 
+      objectReference: {fileID: 4387082747080195968}
     - target: {fileID: 7076466232322109540, guid: 5c4d84eac7544b848bd840390376bad1, type: 3}
       propertyPath: pauseManager
       value: 

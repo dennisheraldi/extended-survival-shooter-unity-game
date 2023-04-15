@@ -169,10 +169,12 @@ public class Shopkeeper : MonoBehaviour
         if (MainManager.Instance.ownedWeapons.Contains("Shotgun"))
         {
             ShotgunBuyButton.interactable = false;
-        } else if (MainManager.Instance.ownedWeapons.Contains("Sword"))
+        } 
+        if (MainManager.Instance.ownedWeapons.Contains("Sword"))
         {
             SwordBuyButton.interactable = false;
-        } else if (MainManager.Instance.ownedWeapons.Contains("Bow"))
+        } 
+        if (MainManager.Instance.ownedWeapons.Contains("Bow"))
         {
             BowBuyButton.interactable = false;
         }
