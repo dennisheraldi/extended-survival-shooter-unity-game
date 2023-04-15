@@ -50,7 +50,7 @@ public class Bow : MonoBehaviour
         chargeSlider.value = power;
         power = 0f;
 
-        if (timer >= time) {
+        if (timer >= time && timer > 1f) {
             switchWeaponAble = true;
         }
 
@@ -70,9 +70,9 @@ public class Bow : MonoBehaviour
 
         if (Input.GetButtonUp("Fire1") && validClick) {
             // StopAllCoroutines();
+            timer = 0f;
             CleanGunLine();
             StartCoroutine(Coroutine_Movement(time, v0, power));
-            timer = 0f;
             validClick = false;
             shot = true;
             switchWeaponAble = false;

@@ -19,7 +19,7 @@ public class WeaponSwitch : MonoBehaviour
         Select(selectedWeapon);
 
         time = 0f;
-        bow = weapons[2].gameObject.GetComponent<Bow>();
+        bow = weapons[3].gameObject.GetComponent<Bow>();
     }
 
     void Update()
@@ -28,7 +28,7 @@ public class WeaponSwitch : MonoBehaviour
         
         int prevSelected = selectedWeapon;
 
-        if (prevSelected != 2 || (prevSelected == 2 && bow.switchWeaponAble)) {
+        if (prevSelected != 3 || (prevSelected == 3 && bow.switchWeaponAble)) {
             for (int i = 0; i < keys.Length; i++) {
                 if (Input.GetKeyDown(keys[i]) && time >= switchTime) {
                     selectedWeapon = i;
@@ -70,19 +70,22 @@ public class WeaponSwitch : MonoBehaviour
         keys[0] = KeyCode.Alpha1;
         keys[1] = KeyCode.Alpha2;
         keys[2] = KeyCode.Alpha3;
+        keys[3] = KeyCode.Alpha4;
     }
 
     void Select(int weaponIndex) {
-        Bow bow = weapons[2].gameObject.GetComponent<Bow>();
+        Bow bow = weapons[3].gameObject.GetComponent<Bow>();
+        Shotgun shotgun = weapons[1].gameObject.GetComponent<Shotgun>();
 
         // bow UI
-        if (weaponIndex == 2) {
+        if (weaponIndex == 3) {
             chargeSlider.gameObject.SetActive(true);
         } else {
             chargeSlider.gameObject.SetActive(false);
         }
 
         // clean gunline
+        shotgun.CleanGunLine();
         bow.CleanGunLine();
 
         for (int i = 0; i < weapons.Length; i++) {

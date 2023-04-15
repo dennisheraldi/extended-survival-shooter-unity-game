@@ -84,6 +84,14 @@ public class Shotgun : MonoBehaviour
         gunLight.enabled = false;
     }
 
+    public void CleanGunLine() {
+        if (gunLines is not null) {
+            for (int i = 0; i < gunLines.Count; i++) {
+                gunLines[i].enabled = false;
+            }
+        }
+    }
+
     void Shoot()
     {
         timer = 0f;
