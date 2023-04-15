@@ -34,6 +34,8 @@ public class QuestManager : MonoBehaviour
     float restartTimer;
     int currentQuest;
 
+    bool isMoneyPaid = false;
+
     // Shopkeeper phase timer
     float shopkeeperDelay = 10f;
     float shopkeeperTimer = 0;
@@ -85,7 +87,7 @@ public class QuestManager : MonoBehaviour
     
         if (PlayerHealth.isDead)
         {
-            Transition("Quest Failed", "GameOver", "MainScene", 0);
+            Transition("Quest Failed", "GameOver", "MainScene");
             TimerTxt.text = "";
         }
         else
@@ -121,6 +123,13 @@ public class QuestManager : MonoBehaviour
         if (totalKill == 3)
         {
             MainManager.Instance.isQuestOnGoing = false;
+            // Give player money
+            if (!isMoneyPaid)
+            {
+                MainManager.Instance.currentMoney += 500;
+                isMoneyPaid = true;
+            }
+
             if (shopkeeperTimer < shopkeeperDelay){
                 shopkeeperInfoText.gameObject.SetActive(true);
             }
@@ -132,7 +141,7 @@ public class QuestManager : MonoBehaviour
                 MainManager.Instance.currentQuest = 2;
                 MainManager.Instance.nextScene = "TransitionQuest1";
                 questVerdictText.text = "Reward: +500 Money";
-                Transition("Quest 1 Completed", "QuestCompleted", "TransitionQuest1ToQuest2", 500);
+                Transition("Quest 1 Completed", "QuestCompleted", "TransitionQuest1ToQuest2");
             }
         }
 
@@ -147,6 +156,14 @@ public class QuestManager : MonoBehaviour
         if (totalKill == 6)
         {
             MainManager.Instance.isQuestOnGoing = false;
+
+            // Give player money
+            if (!isMoneyPaid)
+            {
+                MainManager.Instance.currentMoney += 1000;
+                isMoneyPaid = true;
+            }
+
             if (shopkeeperTimer < shopkeeperDelay){
                 shopkeeperInfoText.gameObject.SetActive(true);
             }
@@ -159,7 +176,7 @@ public class QuestManager : MonoBehaviour
                 MainManager.Instance.currentQuest = 3;
                 MainManager.Instance.nextScene = "MainScene";
                 questVerdictText.text = "Reward: +1000 Money";
-                Transition("Quest 2 Completed", "QuestCompleted", "Quest3", 1000);
+                Transition("Quest 2 Completed", "QuestCompleted", "Quest3");
             } 
         }
     }
@@ -174,9 +191,16 @@ public class QuestManager : MonoBehaviour
         questText.text = "Quest 3: Bunuh Zombies yang ada (" + totalKill.ToString() + "/9)";
         moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
 
-        if (totalKill == 1)
+        if (totalKill == 9)
         {
             MainManager.Instance.isQuestOnGoing = false;
+
+            if (!isMoneyPaid)
+            {
+                MainManager.Instance.currentMoney += 1500;
+                isMoneyPaid = true;
+            }
+
             if (shopkeeperTimer < shopkeeperDelay){
                 shopkeeperInfoText.gameObject.SetActive(true);
             }
@@ -187,9 +211,9 @@ public class QuestManager : MonoBehaviour
                 MainManager.Instance.isQuestOnGoing = false;
                 MainManager.Instance.currentQuest = 4;
                 MainManager.Instance.nextScene = "MainScene";
-                questVerdictText.text = "Reward: +1000 Money";
+                questVerdictText.text = "Reward: +1500 Money";
                 TimerTxt.gameObject.SetActive(false);
-                Transition("Quest 3 Completed", "QuestCompleted", "TransitionQuest3ToQuest4", 1000);
+                Transition("Quest 3 Completed", "QuestCompleted", "TransitionQuest3ToQuest4");
             } 
         }
     }
@@ -210,7 +234,7 @@ public class QuestManager : MonoBehaviour
     }
 
 
-    void Transition(string verdictText, string trigger, string continueToScene, int obtainedMoney)
+    void Transition(string verdictText, string trigger, string continueToScene)
     {
         questVerdict.text = verdictText;
         anim.SetTrigger(trigger);
@@ -231,15 +255,14 @@ public class QuestManager : MonoBehaviour
             }
         } else if(trigger == "QuestCompleted")
         {
-            StartCoroutine(UpdatePhase(obtainedMoney));
+            StartCoroutine(UpdatePhase());
         }
     }
 
-    IEnumerator UpdatePhase(int obtainedMoney)
+    IEnumerator UpdatePhase()
     {
         // Update money
         yield return new WaitForSeconds(1);
-        MainManager.Instance.currentMoney += obtainedMoney;
         Reset();
         Time.timeScale = 0f;
         shopkeeperInfoText.gameObject.SetActive(false);

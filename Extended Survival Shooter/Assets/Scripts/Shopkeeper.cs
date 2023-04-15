@@ -212,4 +212,10 @@ public class Shopkeeper : MonoBehaviour
             weaponSwitch.ownedWeapons.Add("Bow");
         }
     }
+
+    public void CloseShop(){
+        anim.SetBool("isShopOpen", false);
+        information.gameObject.SetActive(true);
+        Time.timeScale = 1;
+    }
 }

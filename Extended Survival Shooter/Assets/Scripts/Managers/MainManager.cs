@@ -32,7 +32,7 @@ public class MainManager : MonoBehaviour
         currentPetHealth = 100;
         ownedWeapons = new List<string> {"NormalGun"};
         currentPlayerHealth = 100;
-        currentMoney = 1000;
+        currentMoney = 0;
         currentQuest = 1;
         currentPlayDuration = 0;
         immunity = false;
@@ -67,6 +67,8 @@ public class MainManager : MonoBehaviour
         public string timeSaved;
         public string currentPet;
         public int currentPetHealth;
+        public List<string> ownedWeapons;
+
     }
 
     public void SaveQuestProgress(int slotNumber, string slotName)
@@ -84,6 +86,8 @@ public class MainManager : MonoBehaviour
         data.playerName = playerName;
         data.currentPet = currentPet;
         data.currentPetHealth = currentPetHealth;
+        data.ownedWeapons = ownedWeapons;
+
         string json = JsonUtility.ToJson(data);
 
         // Mencari data terlebih dahulu kemudian dihapus ketika ditemukan
@@ -122,6 +126,7 @@ public class MainManager : MonoBehaviour
                 playerName = data.playerName;
                 currentPet = data.currentPet;
                 currentPetHealth = data.currentPetHealth;
+                ownedWeapons = data.ownedWeapons;
             }
         }
     }

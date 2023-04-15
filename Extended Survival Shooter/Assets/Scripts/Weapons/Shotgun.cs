@@ -63,7 +63,7 @@ public class Shotgun : MonoBehaviour
         timer += Time.deltaTime;
 
         // If the Fire1 button is being press and it's time to fire... (+ scene manager)
-        if (Input.GetButton("Fire1") && timer >= timeBetweenBullets /* && !pauseManager.canvas.enabled */)
+        if (Input.GetButton("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
             Shoot();
         }

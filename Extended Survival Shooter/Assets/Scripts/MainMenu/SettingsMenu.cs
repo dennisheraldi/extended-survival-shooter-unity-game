@@ -17,6 +17,7 @@ public class SettingsMenu : MonoBehaviour
         NamePlaceholder.text = PlayerDataLoader.playerName;
         InputtedName.text = PlayerDataLoader.playerName;
         VolumeSlider.value = PlayerDataLoader.gameVolume;
+        AudioListener.volume = PlayerDataLoader.gameVolume;
     }
 
     // Update is called once per frame
