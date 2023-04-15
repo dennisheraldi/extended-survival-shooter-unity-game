@@ -7,14 +7,24 @@ public class WeaponSwitch : MonoBehaviour
 {
     Transform[] weapons;
     KeyCode[] keys;
+    public List<string> ownedWeapons;
+    List<string> possibleWeapons;
     float switchTime = 1f;
     int selectedWeapon = 0;
+    int scrollIndex = 0;
     float time;
     public Slider chargeSlider;
     Bow bow;
 
     void Start()
     {
+        possibleWeapons = new List<string>() {
+            "NormalGun",
+            "Shotgun",
+            "Sword",
+            "Bow"
+        };
+        ownedWeapons = new List<string>() {"NormalGun"};
         SetWeapons();
         Select(selectedWeapon);
 
@@ -27,34 +37,42 @@ public class WeaponSwitch : MonoBehaviour
         time += Time.deltaTime;
         
         int prevSelected = selectedWeapon;
+        int prevScrollIndex = scrollIndex;
 
-        if (prevSelected != 3 || (prevSelected == 3 && bow.switchWeaponAble)) {
+        if ((prevSelected != 3 || (prevSelected == 3 && bow.switchWeaponAble)) && (time >= switchTime)) {
             for (int i = 0; i < keys.Length; i++) {
-                if (Input.GetKeyDown(keys[i]) && time >= switchTime) {
+                if (Input.GetKeyDown(keys[i])) {
                     selectedWeapon = i;
                 }
             }
 
             if (Input.GetAxis("Mouse ScrollWheel") > 0f) {
-                if (selectedWeapon >= weapons.Length - 1) {
-                    selectedWeapon = 0;
+                if (scrollIndex >= ownedWeapons.Count - 1) {
+                    scrollIndex = 0;
                 }
                 else {
-                    selectedWeapon++;
+                    scrollIndex++;
                 }
             }
 
             if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
-                if (selectedWeapon <= 0) {
-                    selectedWeapon = weapons.Length - 1;
+                if (scrollIndex <= 0) {
+                    scrollIndex = ownedWeapons.Count - 1;
                 }
                 else {
-                    selectedWeapon--;
+                    scrollIndex--;
                 }
             }
 
-            if (prevSelected != selectedWeapon) {
+            if (prevScrollIndex != scrollIndex) {
+                selectedWeapon = possibleWeapons.IndexOf(ownedWeapons[scrollIndex]);
+            }
+
+            if (prevSelected != selectedWeapon && ownedWeapons.Contains(possibleWeapons[selectedWeapon])) {
                 Select(selectedWeapon);
+            } else {
+                selectedWeapon = prevSelected;
+                scrollIndex = prevScrollIndex;
             }
         }
     }

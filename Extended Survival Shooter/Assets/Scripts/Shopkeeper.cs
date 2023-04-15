@@ -28,6 +28,9 @@ public class Shopkeeper : MonoBehaviour
     public Button SwordBuyButton;
     public Button BowBuyButton;
 
+    GameObject gun;
+    WeaponSwitch weaponSwitch;
+
     // Timer
     float infoTimer = 0;
     float infoDelay = 1f;
@@ -58,11 +61,21 @@ public class Shopkeeper : MonoBehaviour
                 AuraBuffPetClone.SetActive(true);
             }
         }
+
+        gun = Player.transform.GetChild(0).transform.gameObject;
+        weaponSwitch = gun.GetComponent<WeaponSwitch>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (weaponSwitch.ownedWeapons.Count == 1) {
+            MainManager.Instance.ownedWeapons.ForEach((weapon)=>
+            {
+                weaponSwitch.ownedWeapons.Add(new string(weapon));
+            });
+        }
+
         if (Vector3.Distance(Player.transform.position, Shop.transform.position) < 5)
         {
             if(MainManager.Instance.isQuestOnGoing == true)
@@ -182,4 +195,21 @@ public class Shopkeeper : MonoBehaviour
         }
     }
 
+    public void PurchaseWeapon(string weaponName)
+    {
+        // Buy weapon will set weapon to be switchable
+        if (weaponName == "Shotgun") {
+            MainManager.Instance.currentMoney -= 200;
+            MainManager.Instance.ownedWeapons.Add("Shotgun");
+            weaponSwitch.ownedWeapons.Add("Shotgun");
+        } else if (weaponName == "Sword") {
+            MainManager.Instance.currentMoney -= 300;
+            MainManager.Instance.ownedWeapons.Add("Sword");
+            weaponSwitch.ownedWeapons.Add("Sword");
+        } else if (weaponName == "Bow") {
+            MainManager.Instance.currentMoney -= 400;
+            MainManager.Instance.ownedWeapons.Add("Bow");
+            weaponSwitch.ownedWeapons.Add("Bow");
+        }
+    }
 }

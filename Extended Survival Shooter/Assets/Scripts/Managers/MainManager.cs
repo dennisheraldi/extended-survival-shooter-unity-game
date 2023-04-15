@@ -22,6 +22,7 @@ public class MainManager : MonoBehaviour
     public string playerName;
 
     public string currentPet;
+    public List<string> ownedWeapons;
 
     public int currentPetHealth;
 
@@ -29,6 +30,7 @@ public class MainManager : MonoBehaviour
     {
         currentPet = "";
         currentPetHealth = 100;
+        ownedWeapons = new List<string> {"NormalGun"};
         currentPlayerHealth = 100;
         currentMoney = 1000;
         currentQuest = 1;
