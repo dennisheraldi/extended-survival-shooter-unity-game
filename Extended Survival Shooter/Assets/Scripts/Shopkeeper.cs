@@ -12,9 +12,13 @@ public class Shopkeeper : MonoBehaviour
 
     public GameObject PetHealthUI;
 
-    public GameObject HealerPet;
-    public GameObject AttackerPet;
-    public GameObject AuraBuffPet;
+    public GameObject HealerPetOriginal;
+    public GameObject AttackerPetOriginal;
+    public GameObject AuraBuffPetOriginal;
+
+    public GameObject HealerPetClone;
+    public GameObject AttackerPetClone;
+    public GameObject AuraBuffPetClone;
 
     public Button HealerPetBuyButton;
     public Button AttackerPetBuyButton;
@@ -24,10 +28,36 @@ public class Shopkeeper : MonoBehaviour
     public Button SwordBuyButton;
     public Button BowBuyButton;
 
+    // Timer
+    float infoTimer = 0;
+    float infoDelay = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Clone the pet if it is not null
+        if (MainManager.Instance.currentPet != "")
+        {
+            PetHealthUI.SetActive(true);
+
+            if (MainManager.Instance.currentPet == "Healer")
+            {
+                // Instansiate the pet next to the player
+
+                HealerPetClone = Instantiate(HealerPetOriginal, Player.transform.position, Quaternion.identity);
+                HealerPetClone.SetActive(true);
+            }
+            else if (MainManager.Instance.currentPet == "Attacker")
+            {
+                AttackerPetClone = Instantiate(AttackerPetOriginal, Player.transform.position, Quaternion.identity);
+                AttackerPetClone.SetActive(true);
+            }
+            else if (MainManager.Instance.currentPet == "AuraBuff")
+            {
+                AuraBuffPetClone = Instantiate(AuraBuffPetOriginal, Player.transform.position, Quaternion.identity);
+                AuraBuffPetClone.SetActive(true);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -35,25 +65,48 @@ public class Shopkeeper : MonoBehaviour
     {
         if (Vector3.Distance(Player.transform.position, Shop.transform.position) < 5)
         {
+            if(MainManager.Instance.isQuestOnGoing == true)
+            {
+                information.text = "You are within the range of the shop area, but you cannot open the shop while the quest is ongoing";
+                information.gameObject.SetActive(true);
+            } else {
+                information.text = "You are within the range of the shop area.  Press Button 'B' to open shop";
             information.gameObject.SetActive(true);
+            }
+
             if (Input.GetKeyDown(KeyCode.B))
             {
-                if (anim.GetBool("isShopOpen"))
+                if(MainManager.Instance.isQuestOnGoing == false)
                 {
-                    anim.SetBool("isShopOpen", false);
-                    information.gameObject.SetActive(true);
-                    Time.timeScale = 1;
-                }
-                else
-                {
-                    anim.SetBool("isShopOpen", true);
-                    information.gameObject.SetActive(false);
-                    Time.timeScale = 0;
+                    if (anim.GetBool("isShopOpen"))
+                    {
+                        anim.SetBool("isShopOpen", false);
+                        information.gameObject.SetActive(true);
+                        Time.timeScale = 1;
+                    }
+                    else
+                    {
+                        anim.SetBool("isShopOpen", true);
+                        information.gameObject.SetActive(false);
+                        Time.timeScale = 0;
+                    }
                 }
             }
         } else
         {
-            information.gameObject.SetActive(false);
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                infoTimer = 0;
+                information.text = "You are too far away from the shopkeeper";
+                information.gameObject.SetActive(true);
+            }
+
+            infoTimer += Time.deltaTime;
+            if (infoTimer >= infoDelay)
+            {
+                information.gameObject.SetActive(false);
+            }
+
             anim.SetBool("isShopOpen", false);
         }
 
@@ -92,7 +145,8 @@ public class Shopkeeper : MonoBehaviour
             HealerPetBuyButton.interactable = false;
             AttackerPetBuyButton.interactable = false;
             AuraBuffPetBuyButton.interactable = false;
-        }
+            PetHealthUI.SetActive(true);
+        } 
 
         if (MainManager.Instance.currentPet == ""){
             PetHealthUI.SetActive(false);
@@ -106,17 +160,23 @@ public class Shopkeeper : MonoBehaviour
             if (petName == "Healer"){
                 MainManager.Instance.currentMoney -= 200;
                 MainManager.Instance.currentPet = "Healer";
-                Instantiate(HealerPet, Player.transform.position, Quaternion.identity);
+                MainManager.Instance.currentPetHealth = 100;
+                HealerPetClone = Instantiate(HealerPetOriginal, Player.transform.position, Quaternion.identity); 
+                HealerPetClone.gameObject.SetActive(true);
             } else if (petName == "Attacker")
             {
                 MainManager.Instance.currentMoney -= 300;
                 MainManager.Instance.currentPet = "Attacker";
-                Instantiate(AttackerPet, Player.transform.position, Quaternion.identity);
+                MainManager.Instance.currentPetHealth = 100;
+                AttackerPetClone = Instantiate(AttackerPetOriginal, Player.transform.position, Quaternion.identity);
+                AttackerPetClone.gameObject.SetActive(true);
             } else if (petName == "AuraBuff")
             {
                 MainManager.Instance.currentMoney -= 400;
                 MainManager.Instance.currentPet = "AuraBuff";
-                Instantiate(AuraBuffPet, Player.transform.position, Quaternion.identity);
+                MainManager.Instance.currentPetHealth = 100;
+                AuraBuffPetClone = Instantiate(AuraBuffPetOriginal, Player.transform.position, Quaternion.identity);
+                AuraBuffPetClone.gameObject.SetActive(true);
             }
             PetHealthUI.SetActive(true);
         }

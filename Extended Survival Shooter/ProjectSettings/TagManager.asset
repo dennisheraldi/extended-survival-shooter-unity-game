@@ -9,6 +9,8 @@ TagManager:
   - Pet
   - Healer
   - Buff
+  - PetHealthSlider
+  - PetHealthText
   layers:
   - Default
   - TransparentFX

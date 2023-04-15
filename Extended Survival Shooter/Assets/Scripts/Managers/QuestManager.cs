@@ -15,6 +15,8 @@ public class QuestManager : MonoBehaviour
     public Text details;
     public Text questVerdictText;
     public Text moneyText;
+
+    public Text shopkeeperInfoText;
     public Button SaveProgressButton;
     public Button ContinueWithoutSaving;
     public Button RestartButton;
@@ -32,6 +34,10 @@ public class QuestManager : MonoBehaviour
     float restartTimer;
     int currentQuest;
 
+    // Shopkeeper phase timer
+    float shopkeeperDelay = 10f;
+    float shopkeeperTimer = 0;
+
     //Timer materials
     public Text TimerTxt;
     //bool isTimerOn = false;
@@ -44,7 +50,7 @@ public class QuestManager : MonoBehaviour
         restartDelay = 5f;
         restartTimer = 0;
         PlayerHealth.isDead = false;
-        TimerQ3 = 30f;
+        TimerQ3 = 50f;
         
 
         if (MainManager.Instance != null)
@@ -112,13 +118,22 @@ public class QuestManager : MonoBehaviour
         questText.text = "Quest 1: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/3)";
         moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
         TimerTxt.text = "";
-        if (totalKill == 1)
+        if (totalKill == 3)
         {
             MainManager.Instance.isQuestOnGoing = false;
-            MainManager.Instance.currentQuest = 2;
-            MainManager.Instance.nextScene = "TransitionQuest1";
-            questVerdictText.text = "Reward: +200 Money";
-            Transition("Quest 1 Completed", "QuestCompleted", "TransitionQuest1ToQuest2", 200);
+            if (shopkeeperTimer < shopkeeperDelay){
+                shopkeeperInfoText.gameObject.SetActive(true);
+            }
+            shopkeeperTimer += Time.deltaTime;
+            shopkeeperInfoText.text = "You have "+ (shopkeeperDelay-shopkeeperTimer).ToString("0") + " seconds to go to the shop before proceeding to the next quest";
+            if (shopkeeperTimer >= shopkeeperDelay)
+            {
+                shopkeeperInfoText.gameObject.SetActive(false);
+                MainManager.Instance.currentQuest = 2;
+                MainManager.Instance.nextScene = "TransitionQuest1";
+                questVerdictText.text = "Reward: +500 Money";
+                Transition("Quest 1 Completed", "QuestCompleted", "TransitionQuest1ToQuest2", 500);
+            }
         }
 
     }
@@ -129,13 +144,23 @@ public class QuestManager : MonoBehaviour
         questText.text = "Quest 2: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/6)";
         moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
         TimerTxt.text = "";
-        if (totalKill == 1)
+        if (totalKill == 6)
         {
             MainManager.Instance.isQuestOnGoing = false;
-            MainManager.Instance.currentQuest = 3;
-            MainManager.Instance.nextScene = "MainScene";
-            questVerdictText.text = "Reward: +500 Money";
-            Transition("Quest 2 Completed", "QuestCompleted", "Quest3", 500);
+            if (shopkeeperTimer < shopkeeperDelay){
+                shopkeeperInfoText.gameObject.SetActive(true);
+            }
+            shopkeeperTimer += Time.deltaTime;
+            shopkeeperInfoText.text = "You have "+ (shopkeeperDelay-shopkeeperTimer).ToString("0") + " seconds to go to the shop before proceeding to the next quest";
+            if (shopkeeperTimer >= shopkeeperDelay)
+            {
+                shopkeeperInfoText.gameObject.SetActive(false);
+                MainManager.Instance.isQuestOnGoing = false;
+                MainManager.Instance.currentQuest = 3;
+                MainManager.Instance.nextScene = "MainScene";
+                questVerdictText.text = "Reward: +1000 Money";
+                Transition("Quest 2 Completed", "QuestCompleted", "Quest3", 1000);
+            } 
         }
     }
 
@@ -152,11 +177,20 @@ public class QuestManager : MonoBehaviour
         if (totalKill == 1)
         {
             MainManager.Instance.isQuestOnGoing = false;
-            MainManager.Instance.currentQuest = 4;
-            MainManager.Instance.nextScene = "MainScene";
-            questVerdictText.text = "Reward: +1000 Money";
-            TimerTxt.gameObject.SetActive(false);
-            Transition("Quest 3 Completed", "QuestCompleted", "TransitionQuest3ToQuest4", 1000);
+            if (shopkeeperTimer < shopkeeperDelay){
+                shopkeeperInfoText.gameObject.SetActive(true);
+            }
+            shopkeeperTimer += Time.deltaTime;
+            shopkeeperInfoText.text = "You have "+ (shopkeeperDelay-shopkeeperTimer).ToString("0") + " seconds to go to the shop before proceeding to the next quest";
+            if (shopkeeperTimer >= shopkeeperDelay)
+            {
+                MainManager.Instance.isQuestOnGoing = false;
+                MainManager.Instance.currentQuest = 4;
+                MainManager.Instance.nextScene = "MainScene";
+                questVerdictText.text = "Reward: +1000 Money";
+                TimerTxt.gameObject.SetActive(false);
+                Transition("Quest 3 Completed", "QuestCompleted", "TransitionQuest3ToQuest4", 1000);
+            } 
         }
     }
 
@@ -208,6 +242,7 @@ public class QuestManager : MonoBehaviour
         MainManager.Instance.currentMoney += obtainedMoney;
         Reset();
         Time.timeScale = 0f;
+        shopkeeperInfoText.gameObject.SetActive(false);
     }
 
     private void Reset()

@@ -19,6 +19,9 @@ public class PetHealerHealth : MonoBehaviour
     bool isDead;                                // Whether the enemy is dead.
     bool isSinking;                             // Whether the enemy has started sinking through the floor.
 
+    float sinkingDelay = 2f;
+    float sinkingTimer = 0f;
+
 
     void Awake()
     {
@@ -27,7 +30,9 @@ public class PetHealerHealth : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
 
         // Setting the current health when the enemy first spawns.
-        currentHealth = startingHealth;
+        currentHealth = MainManager.Instance.currentPetHealth;
+        petHealthSlider.value = currentHealth;
+        petHealthText.text = currentHealth.ToString() + "/100";
     }
 
 
@@ -53,12 +58,12 @@ public class PetHealerHealth : MonoBehaviour
         // Reduce the current health by the amount of damage sustained.
         currentHealth -= amount;
 
-        // Update the health slider
-        // petHealthSlider.value = currentHealth;
-        // // Update the health text
-        // petHealthText.text = currentHealth.ToString() + "/100";
+        //Update the health slider
+        petHealthSlider.value = currentHealth;
+        // Update the health text
+        petHealthText.text = currentHealth.ToString() + "/100";
 
-        // MainManager.Instance.currentPetHealth = currentHealth;
+        MainManager.Instance.currentPetHealth = currentHealth;
 
         // If the current health is less than or equal to zero...
         if (currentHealth <= 0)
@@ -96,7 +101,10 @@ public class PetHealerHealth : MonoBehaviour
         // The enemy should no sink.
         isSinking = true;
 
-        // After 2 seconds destory the enemy.
+        //After 2 seconds destory the enemy.
         Destroy(gameObject, 2f);
+
+        
     }
+
 }
