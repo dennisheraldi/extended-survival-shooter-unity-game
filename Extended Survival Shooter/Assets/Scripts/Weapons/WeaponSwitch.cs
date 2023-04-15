@@ -47,20 +47,20 @@ public class WeaponSwitch : MonoBehaviour
             }
 
             if (Input.GetAxis("Mouse ScrollWheel") > 0f) {
-                if (scrollIndex >= ownedWeapons.Count - 1) {
-                    scrollIndex = 0;
-                }
-                else {
-                    scrollIndex++;
-                }
-            }
-
-            if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
                 if (scrollIndex <= 0) {
                     scrollIndex = ownedWeapons.Count - 1;
                 }
                 else {
                     scrollIndex--;
+                }
+            }
+
+            if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
+                if (scrollIndex >= ownedWeapons.Count - 1) {
+                    scrollIndex = 0;
+                }
+                else {
+                    scrollIndex++;
                 }
             }
 
