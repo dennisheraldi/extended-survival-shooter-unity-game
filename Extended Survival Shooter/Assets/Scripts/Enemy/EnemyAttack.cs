@@ -11,13 +11,16 @@ public class EnemyAttack : MonoBehaviour
     GameObject player;
     GameObject pet;
     GameObject healer;
+    GameObject attacker;
     PlayerHealth playerHealth;
     PetBuffHealth petHealth;
     PetHealerHealth healerHealth;
+    PetHealth attackerHealth;
     //EnemyHealth enemyHealth;
     bool playerInRange;
     bool petInRange;
     bool healerInRange;
+    bool attackerInRange;
     float timer;
 
 
@@ -52,6 +55,14 @@ public class EnemyAttack : MonoBehaviour
                 healerInRange = true;
             }
         }
+        if (GameObject.FindGameObjectWithTag("Attacker") != null)
+        {
+            attacker = GameObject.FindGameObjectWithTag("Attacker");
+            if (other.gameObject == attacker && other.isTrigger == false)
+            {
+                attackerInRange = true;
+            }
+        }
     }
 
     void OnTriggerExit (Collider other)
@@ -74,6 +85,14 @@ public class EnemyAttack : MonoBehaviour
             if (other.gameObject == healer)
             {
                 healerInRange = false;
+            }
+        }
+        if (GameObject.FindGameObjectWithTag("Attacker") != null)
+        {
+            healer = GameObject.FindGameObjectWithTag("Attacker");
+            if (other.gameObject == attacker)
+            {
+                attackerInRange = false;
             }
         }
     }
@@ -100,6 +119,14 @@ public class EnemyAttack : MonoBehaviour
             {
 
                 AttackHealer ();
+            }
+        }
+        if (GameObject.FindGameObjectWithTag("Attacker") != null)
+        {
+            if (timer >= timeBetweenAttacks && attackerInRange/* && enemyHealth.currentHealth > 0*/)
+            {
+
+                AttackAttacker ();
             }
         }
         if (playerHealth.currentHealth <= 0)
@@ -139,6 +166,16 @@ public class EnemyAttack : MonoBehaviour
         if (healerHealth.currentHealth > 0)
         {
             healerHealth.TakeDamage (attackDamage);
+        }
+    }
+
+    void AttackAttacker()
+    {
+        timer = 0f;
+        attackerHealth = GameObject.FindGameObjectWithTag("Attacker").GetComponent<PetHealth>();
+        if (attackerHealth.currentHealth > 0)
+        {
+            attackerHealth.TakeDamage (attackDamage);
         }
     }
 }

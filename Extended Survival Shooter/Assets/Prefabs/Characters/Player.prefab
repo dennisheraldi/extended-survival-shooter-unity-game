@@ -15086,11 +15086,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4103020321582633613, guid: 68169f254f8a14433afdb4913e0157be, type: 3}
       propertyPath: damagePerShot
-      value: 15
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4103020321582633613, guid: 68169f254f8a14433afdb4913e0157be, type: 3}
       propertyPath: timeBetweenBullets
-      value: 0.5
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4103020321582633619, guid: 68169f254f8a14433afdb4913e0157be, type: 3}
       propertyPath: m_IsActive
@@ -15172,5 +15172,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f6bb2fa5401b354c9d2ff3204aff7f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 40
+  damage: 75
   knife: {fileID: 8757326543064374610}

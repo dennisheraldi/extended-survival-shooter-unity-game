@@ -11,6 +11,7 @@ TagManager:
   - Buff
   - PetHealthSlider
   - PetHealthText
+  - Attacker
   layers:
   - Default
   - TransparentFX

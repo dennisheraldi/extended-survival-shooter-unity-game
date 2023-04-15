@@ -13,8 +13,8 @@ public class PetHealth : MonoBehaviour
     public TextMeshProUGUI petHealthText;
 
     Animator anim;
-    // AudioSource playerAudio;
     PetMovement petMovement;
+    AudioSource petAudio;
     PetAttack petAttack;
     bool isDead;                                                                                          
 
@@ -22,7 +22,7 @@ public class PetHealth : MonoBehaviour
     void Awake()
     {
         anim = GetComponent<Animator>();
-        // petAudio = GetComponent<AudioSource>();
+        petAudio = GetComponent<AudioSource>();
         petMovement = GetComponent<PetMovement>();
         petAttack = GetComponentInChildren<PetAttack>();
 
@@ -62,7 +62,7 @@ public class PetHealth : MonoBehaviour
 
         MainManager.Instance.currentPetHealth = currentHealth;
 
-        // petAudio.Play();
+        petAudio.Play();
 
         if (currentHealth <= 0 && !isDead)
         {
@@ -81,15 +81,16 @@ public class PetHealth : MonoBehaviour
         // petAttack.DisableEffects();
 
         anim.SetBool("Run", false);
-        anim.SetBool("Turn Head", true);
+        anim.SetTrigger("Dead");
 
-        // petAudio.clip = deathClip;
-        // petAudio.Play();
+        petAudio.clip = deathClip;
+        petAudio.Play();
 
         petMovement.enabled = false;
         petAttack.enabled = false;
+        
 
-        //After 2 seconds destory the enemy.
+        //After 2 seconds destroy the enemy.
         Destroy(gameObject, 2f);
     }
 }

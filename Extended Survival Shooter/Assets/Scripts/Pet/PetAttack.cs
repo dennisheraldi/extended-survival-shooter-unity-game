@@ -8,13 +8,17 @@ public class PetAttack : MonoBehaviour
     public float timeBetweenAttacks = 10.0f;       
 
     public GameObject chick;  
+    public AudioClip attackClip;
 
     PetMovement petMovement;
+    AudioSource petAudio;
     float timer = 0.0f;    
     float distance;              
 
     void Awake()
     {
+        petAudio = GetComponent<AudioSource>();
+        petAudio.clip = attackClip;
         petMovement = GetComponent<PetMovement>();
     }
 
@@ -34,6 +38,7 @@ public class PetAttack : MonoBehaviour
 
     void Shoot()
     {
+        petAudio.Play();
         timer = 0f;
 
         Instantiate(chick, transform.position, transform.rotation);

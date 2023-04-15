@@ -10,7 +10,7 @@ public class ChickAttack : MonoBehaviour
 
     void Start()
     {
-        pet = GameObject.FindGameObjectWithTag("Pet");
+        pet = GameObject.FindGameObjectWithTag("Attacker");
         petMovement = pet.GetComponent<PetMovement>();
     }
 
