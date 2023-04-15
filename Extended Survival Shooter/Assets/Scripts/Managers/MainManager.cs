@@ -65,6 +65,8 @@ public class MainManager : MonoBehaviour
         public bool isQuestOnGoing;
         public string playerName;
         public string timeSaved;
+        public string currentPet;
+        public int currentPetHealth;
     }
 
     public void SaveQuestProgress(int slotNumber, string slotName)
@@ -80,6 +82,8 @@ public class MainManager : MonoBehaviour
         data.gameVolume = gameVolume;
         data.isQuestOnGoing = isQuestOnGoing;
         data.playerName = playerName;
+        data.currentPet = currentPet;
+        data.currentPetHealth = currentPetHealth;
         string json = JsonUtility.ToJson(data);
 
         // Mencari data terlebih dahulu kemudian dihapus ketika ditemukan
@@ -116,6 +120,8 @@ public class MainManager : MonoBehaviour
                 gameVolume = data.gameVolume;
                 isQuestOnGoing = data.isQuestOnGoing;
                 playerName = data.playerName;
+                currentPet = data.currentPet;
+                currentPetHealth = data.currentPetHealth;
             }
         }
     }
