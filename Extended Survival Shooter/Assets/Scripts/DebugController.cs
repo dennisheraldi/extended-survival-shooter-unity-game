@@ -33,6 +33,7 @@ public class DebugController : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("DebugController Awake");
 
         ROSE_GOLD = new DebugCommand("rose_gold", "Gives you 1000 gold", "rose_gold", () => {
             MainManager.Instance.currentMoney += 1000;

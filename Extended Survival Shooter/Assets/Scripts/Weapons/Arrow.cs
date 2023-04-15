@@ -27,25 +27,32 @@ public class Arrow : MonoBehaviour
 
             if (enemyHealth != null)
             {
-                if (GameObject.FindGameObjectWithTag("Buff") != null)
+                if (MainManager.Instance.instantKill == true)
                 {
-                    GameObject pet = GameObject.FindGameObjectWithTag("Buff");
-                    PetBuffAction buff = pet.GetComponent<PetBuffAction>();
-                    if (buff.buffed)
+                    enemyHealth.TakeDamage(1000, collision.GetContact(0).point);
+                }
+                else 
+                {
+                    if (GameObject.FindGameObjectWithTag("Buff") != null)
                     {
-                            int damageBuff = buff.buffDamage;
-                            enemyHealth.TakeDamage(damageBuff, collision.GetContact(0).point);
+                        GameObject pet = GameObject.FindGameObjectWithTag("Buff");
+                        PetBuffAction buff = pet.GetComponent<PetBuffAction>();
+                        if (buff.buffed)
+                        {
+                                int damageBuff = buff.buffDamage;
+                                enemyHealth.TakeDamage(damageBuff, collision.GetContact(0).point);
+                        }
+                        else
+                        {
+                            int damage = 20;
+                            enemyHealth.TakeDamage(damage, collision.GetContact(0).point);
+                        }
                     }
                     else
                     {
                         int damage = 20;
                         enemyHealth.TakeDamage(damage, collision.GetContact(0).point);
                     }
-                }
-                else
-                {
-                    int damage = 20;
-                    enemyHealth.TakeDamage(damage, collision.GetContact(0).point);
                 }
 
             }

@@ -63,8 +63,9 @@ public class Bow : MonoBehaviour
 
         if (Input.GetButton("Fire1") && validClick)
         {
+            
             power = timerPower <= 2.5f ? timerPower * 4f : 10f;
-            DrawPath(out time, out v0, power, angle, stepCount);
+            if (power != 0) DrawPath(out time, out v0, power, angle, stepCount);
         }
 
         if (Input.GetButtonUp("Fire1") && validClick) {

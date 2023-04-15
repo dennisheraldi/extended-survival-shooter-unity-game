@@ -14,8 +14,7 @@ public class PetHealth : MonoBehaviour
     // AudioSource playerAudio;
     PetMovement petMovement;
     PetAttack petAttack;
-    bool isDead;                                                
-    bool damaged;                                               
+    bool isDead;                                                                                          
 
 
     void Awake()
@@ -48,7 +47,6 @@ public class PetHealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        damaged = true;
 
         currentHealth -= amount;
 

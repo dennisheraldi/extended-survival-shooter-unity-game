@@ -114,26 +114,33 @@ public class Shotgun : MonoBehaviour
 
                 if (enemyHealth != null)
                 {
-                    if (GameObject.FindGameObjectWithTag("Buff") != null)
+                    if (MainManager.Instance.instantKill == true)
                     {
-                        GameObject pet = GameObject.FindGameObjectWithTag("Buff");
-                        PetBuffAction buff = pet.GetComponent<PetBuffAction>();
-                        if (buff.buffed)
+                        enemyHealth.TakeDamage(1000, shootHit.point);
+                    }
+                    else
+                    {
+                        if (GameObject.FindGameObjectWithTag("Buff") != null)
                         {
-                                int damageBuff = buff.buffDamage;
-                                int damage = (int)(damageBuff/((shootHit.point - shootRay.origin).magnitude * (shootHit.point - shootRay.origin).magnitude));
+                            GameObject pet = GameObject.FindGameObjectWithTag("Buff");
+                            PetBuffAction buff = pet.GetComponent<PetBuffAction>();
+                            if (buff.buffed)
+                            {
+                                    int damageBuff = buff.buffDamage;
+                                    int damage = (int)(damageBuff/((shootHit.point - shootRay.origin).magnitude * (shootHit.point - shootRay.origin).magnitude));
+                                    enemyHealth.TakeDamage(damage, shootHit.point);
+                            }
+                            else
+                            {
+                                int damage = (int)(damagePerShot/((shootHit.point - shootRay.origin).magnitude * (shootHit.point - shootRay.origin).magnitude));
                                 enemyHealth.TakeDamage(damage, shootHit.point);
+                            }
                         }
                         else
                         {
                             int damage = (int)(damagePerShot/((shootHit.point - shootRay.origin).magnitude * (shootHit.point - shootRay.origin).magnitude));
                             enemyHealth.TakeDamage(damage, shootHit.point);
                         }
-                    }
-                    else
-                    {
-                        int damage = (int)(damagePerShot/((shootHit.point - shootRay.origin).magnitude * (shootHit.point - shootRay.origin).magnitude));
-                        enemyHealth.TakeDamage(damage, shootHit.point);
                     }
 
                 }
