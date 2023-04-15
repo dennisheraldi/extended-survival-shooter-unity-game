@@ -149,7 +149,7 @@ public class QuestManager : MonoBehaviour
         questText.text = "Quest 3: Bunuh Zombies yang ada (" + totalKill.ToString() + "/9)";
         moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
 
-        if (totalKill == 9)
+        if (totalKill == 1)
         {
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.currentQuest = 4;
@@ -169,32 +169,12 @@ public class QuestManager : MonoBehaviour
         if (totalKill == 1)
         {
             MainManager.Instance.isQuestOnGoing = false;
-            MainManager.Instance.currentQuest = 5;
-            MainManager.Instance.nextScene = "MainScene";
-            questVerdictText.text = "Reward: +1000 Money";
-            Transition("Quest 4 Completed", "QuestCompleted", "MainScene", 1000);
+            MainManager.Instance.nextScene = "EndingScene";
+            ScoreUtility.AddScore(new Score(PlayerPrefs.GetString("PlayerName"), MainManager.Instance.currentPlayDuration));
+            SceneManager.LoadScene("EndingScene");
         }
     }
 
-    void Quest5()
-    {
-        int totalKill = ZombunnyKilled + ZombearKilled + HellephantKilled;
-        questText.text = "Quest 4: Bunuh Zombunny, Zombear, dan Hellephant (" + totalKill.ToString() + "/12)";
-        moneyText.text = "Money: " + MainManager.Instance.currentMoney.ToString();
-        if (totalKill == 12)
-        {
-            MainManager.Instance.isQuestOnGoing = false;
-            questVerdict.text = "THE END";
-            details.text = "Game Completion Time " + System.TimeSpan.FromSeconds((int)MainManager.Instance.currentPlayDuration).ToString("c");
-            anim.SetTrigger("GameFinished");
-            restartTimer += Time.deltaTime;
-            if (restartTimer >= restartDelay)
-            {
-                Reset();
-                Time.timeScale = 0f;
-            }
-        }
-    }
 
     void Transition(string verdictText, string trigger, string continueToScene, int obtainedMoney)
     {

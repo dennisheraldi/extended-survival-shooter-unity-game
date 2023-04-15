@@ -6,9 +6,9 @@ using UnityEngine;
 public class Score
 {
     public string username;
-    public int score;
+    public float score;
 
-    public Score(string username, int score)
+    public Score(string username, float score)
     {
         this.username = username;
         this.score = score;
