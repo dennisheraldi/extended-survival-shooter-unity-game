@@ -36,6 +36,8 @@ public class QuestManager : MonoBehaviour
 
     bool isMoneyPaid = false;
 
+    bool isQuest3Completed = false;
+
     // Shopkeeper phase timer
     float shopkeeperDelay = 10f;
     float shopkeeperTimer = 0;
@@ -170,6 +172,7 @@ public class QuestManager : MonoBehaviour
                 isMoneyPaid = true;
             }
 
+
             if (shopkeeperTimer < shopkeeperDelay){
                 shopkeeperInfoText.gameObject.SetActive(true);
             }
@@ -191,7 +194,9 @@ public class QuestManager : MonoBehaviour
     {
         TimerTxt.gameObject.SetActive(true);
         timeCount = Time.deltaTime;
-        TimerQ3 -= timeCount;
+        if (!isQuest3Completed){
+            TimerQ3 -= timeCount;
+        }
         TimerTxt.text = "Zombie Membuatmu sesak! \n Waktu tersisa : " + TimerQ3.ToString("0.00");
         int totalKill = ZombunnyV2Killed + ZombearV2Killed + HellephantV2Killed;
         questText.text = "Quest 3: Bunuh Zombies yang ada (" + totalKill.ToString() + "/9)";
@@ -200,6 +205,12 @@ public class QuestManager : MonoBehaviour
         if (totalKill == 9)
         {
             MainManager.Instance.isQuestOnGoing = false;
+
+            // Freeze TimerQ3 and isQuest3Completed is true
+            if (!isQuest3Completed)
+            {
+                isQuest3Completed = true;
+            }
 
             if (!isMoneyPaid)
             {
@@ -285,6 +296,13 @@ public class QuestManager : MonoBehaviour
         ZombearKilled = 0;
         ZombunnyKilled = 0;
         HellephantKilled = 0;
+        TimerQ3 = 50f;
+        isMoneyPaid = false;
+        isQuest3Completed = false;
+        restartDelay = 5f;
+        restartTimer = 0;
+        shopkeeperDelay = 10f;
+        shopkeeperTimer = 0;
     }
 
     public void Continue()
