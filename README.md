@@ -2,7 +2,7 @@
 
 ## Deskripsi Aplikasi
 
-Extended Survival Shooter adalah permainan versi lanjutan dari Survival Shooter klasik...
+Extended Survival Shooter adalah single-player story based game yang merupakan ekstensi dari Survival Shooter klasik.
 
 ## Library yang Digunakan
 
