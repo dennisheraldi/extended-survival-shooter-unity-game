@@ -45,4 +45,4 @@ Unity versi 2021.3.21f1 LTS
 | Damianus Clairvoyance Diva P | 13520035 | Pekerjaan A | X Jam         | Y Jam          |
 | Fachry Dennis Heraldi        | 13520139 | Pekerjaan A | X Jam         | Y Jam          |
 | Jeremy S.O.N. Simbolon       | 13520042 | Pekerjaan A | X Jam         | Y Jam          |
-| Azmi Alfatih Shalahuddin     | 13520158 | Pekerjaan A | X Jam         | Y Jam          |
+| Azmi Alfatih Shalahuddin     | 13520158 | Pekerjaan A | 15Jam         | 25 Jam          |
