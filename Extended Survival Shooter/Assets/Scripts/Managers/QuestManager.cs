@@ -238,6 +238,7 @@ public class QuestManager : MonoBehaviour
             MainManager.Instance.isQuestOnGoing = false;
             MainManager.Instance.nextScene = "EndingScene";
             ScoreUtility.AddScore(new Score(PlayerPrefs.GetString("PlayerName"), MainManager.Instance.currentPlayDuration));
+            Reset();
             Destroy(MainManager.Instance.gameObject);
             SceneManager.LoadScene("EndingScene");
         }
@@ -259,6 +260,7 @@ public class QuestManager : MonoBehaviour
         {
             if (restartTimer >= restartDelay)
             {
+                Reset();
                 Destroy(MainManager.Instance.gameObject);
                 SceneManager.LoadScene("MainMenuScene");
                 
@@ -315,6 +317,7 @@ public class QuestManager : MonoBehaviour
             RestartButton.interactable = false;
         }
         
+        Reset();
 
     }
 }
