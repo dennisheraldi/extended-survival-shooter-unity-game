@@ -19,6 +19,8 @@ public class MainManager : MonoBehaviour
     public string nextScene;
     public bool immunity;
     public bool instantKill;
+    public bool infMoney;
+    public bool pet_immune;
     public string playerName;
 
     public string currentPet;
@@ -40,6 +42,8 @@ public class MainManager : MonoBehaviour
         playerName = PlayerPrefs.GetString("PlayerName");
         gameVolume = PlayerPrefs.GetFloat("GameVolume");
         instantKill = false;
+        infMoney = false;
+        pet_immune = false;
         // start of new code
         if (Instance != null)
         {

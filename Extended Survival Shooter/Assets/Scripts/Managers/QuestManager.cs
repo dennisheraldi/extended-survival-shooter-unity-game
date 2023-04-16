@@ -126,7 +126,10 @@ public class QuestManager : MonoBehaviour
             // Give player money
             if (!isMoneyPaid)
             {
-                MainManager.Instance.currentMoney += 500;
+                if (!MainManager.Instance.infMoney)
+                {
+                    MainManager.Instance.currentMoney += 500;
+                }
                 isMoneyPaid = true;
             }
 
@@ -160,7 +163,10 @@ public class QuestManager : MonoBehaviour
             // Give player money
             if (!isMoneyPaid)
             {
-                MainManager.Instance.currentMoney += 1000;
+                if (!MainManager.Instance.infMoney)
+                {
+                    MainManager.Instance.currentMoney += 1000;
+                }
                 isMoneyPaid = true;
             }
 
@@ -197,7 +203,10 @@ public class QuestManager : MonoBehaviour
 
             if (!isMoneyPaid)
             {
-                MainManager.Instance.currentMoney += 1500;
+                if (!MainManager.Instance.infMoney)
+                {
+                    MainManager.Instance.currentMoney += 1500;
+                }
                 isMoneyPaid = true;
             }
 

@@ -19,8 +19,6 @@ public class PetHealerHealth : MonoBehaviour
     bool isDead;                                // Whether the enemy is dead.
     bool isSinking;                             // Whether the enemy has started sinking through the floor.
 
-    float sinkingDelay = 2f;
-    float sinkingTimer = 0f;
 
 
     void Awake()

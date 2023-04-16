@@ -185,21 +185,30 @@ public class Shopkeeper : MonoBehaviour
         // Buy pet will instantiate pet and cannot buy another pet
         if (MainManager.Instance.currentPet == ""){
             if (petName == "Healer"){
-                MainManager.Instance.currentMoney -= 200;
+                if (!MainManager.Instance.infMoney)
+                {
+                    MainManager.Instance.currentMoney -= 200;
+                }
                 MainManager.Instance.currentPet = "Healer";
                 MainManager.Instance.currentPetHealth = 100;
                 HealerPetClone = Instantiate(HealerPetOriginal, Player.transform.position, Quaternion.identity); 
                 HealerPetClone.gameObject.SetActive(true);
             } else if (petName == "Attacker")
             {
-                MainManager.Instance.currentMoney -= 300;
+                if (!MainManager.Instance.infMoney)
+                {
+                    MainManager.Instance.currentMoney -= 300;
+                }
                 MainManager.Instance.currentPet = "Attacker";
                 MainManager.Instance.currentPetHealth = 100;
                 AttackerPetClone = Instantiate(AttackerPetOriginal, Player.transform.position, Quaternion.identity);
                 AttackerPetClone.gameObject.SetActive(true);
             } else if (petName == "AuraBuff")
             {
-                MainManager.Instance.currentMoney -= 400;
+                if (!MainManager.Instance.infMoney)
+                {
+                    MainManager.Instance.currentMoney -= 400;
+                }
                 MainManager.Instance.currentPet = "AuraBuff";
                 MainManager.Instance.currentPetHealth = 100;
                 AuraBuffPetClone = Instantiate(AuraBuffPetOriginal, Player.transform.position, Quaternion.identity);
@@ -213,15 +222,24 @@ public class Shopkeeper : MonoBehaviour
     {
         // Buy weapon will set weapon to be switchable
         if (weaponName == "Shotgun") {
-            MainManager.Instance.currentMoney -= 200;
+            if (!MainManager.Instance.infMoney)
+            {
+                MainManager.Instance.currentMoney -= 200;
+            }
             MainManager.Instance.ownedWeapons.Add("Shotgun");
             weaponSwitch.ownedWeapons.Add("Shotgun");
         } else if (weaponName == "Sword") {
-            MainManager.Instance.currentMoney -= 300;
+            if (!MainManager.Instance.infMoney)
+            {
+                MainManager.Instance.currentMoney -= 300;
+            }
             MainManager.Instance.ownedWeapons.Add("Sword");
             weaponSwitch.ownedWeapons.Add("Sword");
         } else if (weaponName == "Bow") {
-            MainManager.Instance.currentMoney -= 400;
+            if (!MainManager.Instance.infMoney)
+            {
+                MainManager.Instance.currentMoney -= 400;
+            }
             MainManager.Instance.ownedWeapons.Add("Bow");
             weaponSwitch.ownedWeapons.Add("Bow");
         }

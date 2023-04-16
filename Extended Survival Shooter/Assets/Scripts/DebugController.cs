@@ -19,6 +19,7 @@ public class DebugController : MonoBehaviour
     public static DebugCommand HELP;
     public static DebugCommand KILLPET;
     public static DebugCommand USAIN_BOLT;
+    public static DebugCommand IMMORTAL;
 
     public List<object> commandList;
 
@@ -41,6 +42,7 @@ public class DebugController : MonoBehaviour
     {
         ROSE_GOLD = new DebugCommand("rose_gold", "Gives you 1000 gold", "rose_gold", () => {
             MainManager.Instance.currentMoney = 999999999;
+            MainManager.Instance.infMoney = true;
         });
         IMMUNE = new DebugCommand("immune", "Makes you immune to damage", "immune", () => {
             MainManager.Instance.immunity = true;
@@ -52,12 +54,34 @@ public class DebugController : MonoBehaviour
             showHelp = true;
         });
         KILLPET = new DebugCommand("kill_pet", "Kills your pet", "kill_pet", () => {
-            MainManager.Instance.currentPetHealth = 0;
+            switch (MainManager.Instance.currentPet)
+            {
+                case "Healer":
+                    PetHealerHealth healerHealth = GameObject.FindGameObjectWithTag("Healer").GetComponent<PetHealerHealth>();
+                    healerHealth.TakeDamage(healerHealth.currentHealth);
+                    MainManager.Instance.currentPet = "";
+                    break;
+                case "Attacker":
+                    PetHealth attackerHealth = GameObject.FindGameObjectWithTag("Pet").GetComponent<PetHealth>();
+                    attackerHealth.TakeDamage(attackerHealth.currentHealth);
+                    MainManager.Instance.currentPet = "";
+                    break;
+                case "AuraBuff":
+                    PetBuffHealth buffHealth = GameObject.FindGameObjectWithTag("Buff").GetComponent<PetBuffHealth>();
+                    buffHealth.TakeDamage(buffHealth.currentHealth);
+                    MainManager.Instance.currentPet = "";
+                    break;
+                default:
+                    break;
+            }
         });
         USAIN_BOLT = new DebugCommand("usain_bolt", "Makes you run faster", "usain_bolt", () => {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
             playerMovement.speed = 12;
+        });
+        IMMORTAL = new DebugCommand("immortal", "Makes your pet immortal", "immortal", () => {
+            MainManager.Instance.pet_immune = true;
         });
 
         commandList = new List<object>{
@@ -66,7 +90,8 @@ public class DebugController : MonoBehaviour
             KILLER,
             HELP,
             KILLPET,
-            USAIN_BOLT
+            USAIN_BOLT,
+            IMMORTAL
         };
     }
 

@@ -106,14 +106,14 @@ public class EnemyAttack : MonoBehaviour
         {
             AttackPlayer ();
         }
-        if (GameObject.FindGameObjectWithTag("Buff") != null)
+        if (GameObject.FindGameObjectWithTag("Buff") != null && MainManager.Instance.pet_immune == false)
         {
             if (timer >= timeBetweenAttacks && petInRange/* && enemyHealth.currentHealth > 0*/)
             {
                 AttackPet ();
             }
         }
-        if (GameObject.FindGameObjectWithTag("Healer") != null)
+        if (GameObject.FindGameObjectWithTag("Healer") != null && MainManager.Instance.pet_immune == false)
         {
             if (timer >= timeBetweenAttacks && healerInRange/* && enemyHealth.currentHealth > 0*/)
             {
@@ -121,7 +121,7 @@ public class EnemyAttack : MonoBehaviour
                 AttackHealer ();
             }
         }
-        if (GameObject.FindGameObjectWithTag("Attacker") != null)
+        if (GameObject.FindGameObjectWithTag("Attacker") != null && MainManager.Instance.pet_immune == false)
         {
             if (timer >= timeBetweenAttacks && attackerInRange/* && enemyHealth.currentHealth > 0*/)
             {
