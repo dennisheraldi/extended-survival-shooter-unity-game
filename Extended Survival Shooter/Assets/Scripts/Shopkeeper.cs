@@ -69,7 +69,7 @@ public class Shopkeeper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (weaponSwitch.ownedWeapons.Count == 1) {
+        if (weaponSwitch.ownedWeapons.Count == 0) {
             MainManager.Instance.ownedWeapons.ForEach((weapon)=>
             {
                 weaponSwitch.ownedWeapons.Add(new string(weapon));
