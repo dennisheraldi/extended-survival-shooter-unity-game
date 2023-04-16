@@ -54,21 +54,21 @@ public class Bow : MonoBehaviour
             switchWeaponAble = true;
         }
 
-        if (Input.GetButtonDown("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
+        if (Input.GetButtonDown("Fire2") && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
             shot = false;
             timerPower = 0f;
             validClick = true;
         }
 
-        if (Input.GetButton("Fire1") && validClick && Time.timeScale != 0)
+        if (Input.GetButton("Fire2") && validClick && Time.timeScale != 0)
         {
             
             power = timerPower <= 2.5f ? timerPower * 4f : 10f;
             if (power != 0) DrawPath(out time, out v0, power, angle, stepCount);
         }
 
-        if (Input.GetButtonUp("Fire1") && validClick && Time.timeScale != 0) {
+        if (Input.GetButtonUp("Fire2") && validClick && Time.timeScale != 0) {
             // StopAllCoroutines();
             timer = 0f;
             CleanGunLine();
