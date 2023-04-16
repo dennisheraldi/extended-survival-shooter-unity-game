@@ -43,7 +43,31 @@ public class Knife : MonoBehaviour
             var colliderVector = entity.transform.position - playerPosition;
             if (Vector3.Dot(_player.transform.forward, colliderVector) >= 0 && enemyHealth is not null)
             {
-                enemyHealth.TakeDamage(damage, entity.transform.position);
+                if (MainManager.Instance.instantKill)
+                {
+                    enemyHealth.TakeDamage(1000, entity.transform.position);
+                }
+                else
+                {
+                    if (GameObject.FindGameObjectWithTag("Buff") is not null)
+                    {
+                        GameObject pet = GameObject.FindGameObjectWithTag("Buff");
+                        PetBuffAction buff = pet.GetComponent<PetBuffAction>();
+                        if (buff.buffed)
+                        {
+                            int damageBuff = buff.buffDamage;
+                            enemyHealth.TakeDamage(damageBuff, entity.transform.position);
+                        }
+                        else
+                        {
+                            enemyHealth.TakeDamage(damage, entity.transform.position);
+                        }
+                    }
+                    else
+                    {
+                        enemyHealth.TakeDamage(damage, entity.transform.position);
+                    }
+                }
             }
         }
     }
